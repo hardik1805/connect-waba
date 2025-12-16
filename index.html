@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Connect WhatsApp Business</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    button {
+      background-color: #1877f2;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #145dbf;
+    }
+    p {
+      font-size: 14px;
+      color: #555;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Connect Your WhatsApp</h2>
+  <p>
+    Connect your WhatsApp Business number to enable automated booking,
+    updates, and customer support.
+  </p>
+
+  <button onclick="connectWhatsApp()">Connect WhatsApp Business</button>
+
+  <p>
+    You will continue to use WhatsApp Business App normally.
+  </p>
+</div>
+
+<!-- Facebook SDK -->
+<script>
+  window.fbAsyncInit = function () {
+    FB.init({
+      appId: 1302145801707701, // 🔴 CHANGE THIS
+      autoLogAppEvents: true,
+      xfbml: false,
+      version: 'v24.0'
+    });
+  };
+</script>
+
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/en_US/sdk.js">
+</script>
+
+<script>
+  function connectWhatsApp() {
+    FB.login(function (response) {
+      if (response.authResponse) {
+        console.log("Login success:", response);
+        alert("Connected successfully. You can close this page.");
+      } else {
+        alert("Login cancelled or failed.");
+      }
+    }, {
+      scope: 'business_management,whatsapp_business_management,whatsapp_business_messaging',
+      extras: {
+        setup: {
+          solutionID: 1302145801707701 // 🔴 SAME APP ID
+        }
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
