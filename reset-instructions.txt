@@ -1,0 +1,7 @@
+# WARNING: This is a destructive rewrite of history.
+
+# Force reset the main branch to a specific commit hash.
+git checkout main
+git fetch origin
+git reset --hard 45ed3d80d3921572e792a3d469a322189be19f16
+git push --force-with-lease origin main
