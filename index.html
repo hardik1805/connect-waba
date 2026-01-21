@@ -4,12 +4,10 @@
   <meta charset="UTF-8" />
   <title>Connect WhatsApp - CabMind</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Connect your WhatsApp Business to CabMind AI-powered taxi booking system" />
-  <link rel="icon" type="image/png" href="./V1_logo_with_bg.png" />
+  <meta name="description" content="Connect your WhatsApp Business to CabMind" />
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: linear-gradient(135deg, #1a365d 0%, #0f172a 100%);
@@ -19,120 +17,91 @@
       align-items: center;
       padding: 20px;
     }
-
     .container {
       background: #ffffff;
       border-radius: 24px;
       box-shadow: 0 25px 80px rgba(0,0,0,0.5);
-      max-width: 520px;
+      max-width: 560px;
       width: 100%;
       overflow: hidden;
     }
-
     .header {
-      background: #ffffff;
-      padding: 30px 30px 20px;
+      padding: 30px 30px 18px;
       text-align: center;
       border-bottom: 1px solid #f0f0f0;
     }
-
+    .brand {
+      font-size: 32px;
+      font-weight: 800;
+      color: #1a5276;
+      margin-bottom: 6px;
+    }
     .tagline {
       font-size: 14px;
       color: #1a5276;
       font-weight: 500;
     }
-
     .content {
-      padding: 35px;
+      padding: 28px 28px 24px;
     }
-
     h2 {
       color: #1a365d;
       font-size: 24px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       text-align: center;
     }
-
     .description {
       color: #64748b;
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.7;
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 18px;
     }
 
-    .features {
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 28px;
-      border: 1px solid #e2e8f0;
+    .field {
+      margin: 14px 0 18px;
     }
-
-    .features ul {
-      list-style: none;
-    }
-
-    .features li {
-      padding: 12px 0;
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
       color: #334155;
+      margin-bottom: 8px;
+    }
+    input[type="text"]{
+      width: 100%;
+      padding: 14px 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
       font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      border-bottom: 1px solid #e2e8f0;
+      outline: none;
     }
-
-    .features li:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .features li:first-child {
-      padding-top: 0;
-    }
-
-    .check-icon {
-      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-      color: white;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      flex-shrink: 0;
-      font-weight: bold;
+    input[type="text"]:focus{
+      border-color: #1a5276;
+      box-shadow: 0 0 0 3px rgba(26,82,118,0.15);
     }
 
     .connect-btn {
       background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
       color: white;
       border: none;
-      padding: 18px 32px;
-      font-size: 17px;
-      font-weight: 600;
+      padding: 16px 18px;
+      font-size: 16px;
+      font-weight: 700;
       border-radius: 14px;
       cursor: pointer;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      gap: 10px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
     }
-
     .connect-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.35);
     }
-
-    .connect-btn:active {
-      transform: translateY(0);
-    }
-
     .connect-btn:disabled {
       background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
       cursor: not-allowed;
@@ -140,455 +109,368 @@
       box-shadow: none;
     }
 
-    .connect-btn svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .footer-note {
-      text-align: center;
-      margin-top: 24px;
-      padding-top: 24px;
-      border-top: 1px solid #e2e8f0;
-      color: #94a3b8;
+    .status {
+      margin-top: 14px;
+      padding: 14px 14px;
+      border-radius: 12px;
+      display: none;
       font-size: 13px;
       line-height: 1.6;
     }
-
-    .footer-note a {
-      color: #1a5276;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .footer-note a:hover {
-      text-decoration: underline;
-    }
-
-    .status {
-      margin-top: 20px;
-      padding: 16px 20px;
-      border-radius: 12px;
-      display: none;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
     .status.show { display: block; }
     .status.info { background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; }
     .status.success { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
     .status.error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
     .status.warning { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
 
-    .success-panel {
-      display: none;
-      text-align: center;
-      padding: 20px 0;
-    }
-
-    .success-panel.show { display: block; }
-
-    .success-icon {
-      width: 90px;
-      height: 90px;
-      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px;
-      font-size: 45px;
-      border: 3px solid #86efac;
-    }
-
-    .success-panel h3 {
-      color: #166534;
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-
-    .success-details {
-      background: #f8fafc;
-      border-radius: 12px;
-      padding: 20px;
-      margin-top: 20px;
-      text-align: left;
-      font-size: 13px;
-      border: 1px solid #e2e8f0;
-    }
-
-    .success-details p {
-      margin: 10px 0;
-      color: #475569;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .success-details strong {
-      color: #1e293b;
-      min-width: 120px;
-    }
-
-    .success-details .value {
-      font-family: 'SF Mono', Monaco, monospace;
-      color: #1a5276;
-      font-size: 12px;
-      word-break: break-all;
-      text-align: right;
-    }
-
-    .dashboard-btn {
-      background: linear-gradient(135deg, #1a5276 0%, #1a365d 100%);
-      color: white;
-      border: none;
-      padding: 16px 28px;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 12px;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 24px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .dashboard-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(26, 82, 118, 0.3);
-    }
-
-    .powered-by {
-      text-align: center;
-      padding: 15px;
-      background: #f8fafc;
-      color: #94a3b8;
-      font-size: 12px;
-    }
-
-    .powered-by a {
-      color: #1a5276;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .debug-panel {
-      margin-top: 20px;
+    .debug {
+      margin-top: 14px;
       background: #0f172a;
       border-radius: 12px;
-      padding: 16px;
+      padding: 14px;
       display: none;
     }
-
-    .debug-panel.show { display: block; }
-
-    .debug-panel h4 {
+    .debug.show { display: block; }
+    .debug h4 {
       color: #25D366;
       font-size: 12px;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      margin-bottom: 10px;
     }
-
-    .debug-panel pre {
+    .debug pre {
       color: #cbd5e1;
       font-size: 11px;
       white-space: pre-wrap;
       word-break: break-word;
       max-height: 220px;
       overflow-y: auto;
-      font-family: 'SF Mono', Monaco, monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid #e2e8f0;
+      color: #94a3b8;
+      font-size: 12px;
+      line-height: 1.6;
     }
   </style>
 </head>
 
 <body>
-
-<div class="container">
-  <div class="header">
-    <div id="fallbackLogo" style="display:block; font-size: 32px; font-weight: 700; color: #1a5276;">
-      🚕 CABMIND
+  <div class="container">
+    <div class="header">
+      <div class="brand">🚕 CABMIND</div>
+      <div class="tagline">AI-Powered Communication for Taxi Operators</div>
     </div>
-    <div class="tagline">AI-Powered Communication for Taxi Operators</div>
-  </div>
 
-  <div class="content">
-    <!-- Initial State -->
-    <div id="initialState">
-      <h2>Connect Your WhatsApp</h2>
-
+    <div class="content">
+      <h2>Connect WhatsApp (Test)</h2>
       <p class="description">
-        Link your WhatsApp Business number to enable automated bookings,
-        real-time updates, and 24/7 AI-powered customer support.
+        This page is ONLY for testing whether Meta Embedded Signup can trigger
+        data and whether n8n receives the webhook.
       </p>
 
-      <div class="features">
-        <ul>
-          <li><span class="check-icon">✓</span><span>Keep using your WhatsApp Business App normally</span></li>
-          <li><span class="check-icon">✓</span><span>Automated booking confirmations & updates</span></li>
-          <li><span class="check-icon">✓</span><span>AI handles customer inquiries 24/7</span></li>
-          <li><span class="check-icon">✓</span><span>All messages sync between app & system</span></li>
-          <li><span class="check-icon">✓</span><span>Set up in under 5 minutes</span></li>
-        </ul>
+      <div class="field">
+        <label for="clientId">Client ID (required)</label>
+        <input id="clientId" type="text" placeholder="e.g. aa_hendon" />
       </div>
 
       <button class="connect-btn" id="connectBtn" onclick="launchWhatsAppSignup()">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
         Connect WhatsApp Business
       </button>
 
-      <p class="footer-note">
-        🔒 Secure connection via Meta's official API<br>
-        <a href="https://cabmind.co.uk/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> ·
-        <a href="https://cabmind.co.uk/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a>
-      </p>
-    </div>
+      <div id="statusMessage" class="status"></div>
 
-    <!-- Success State -->
-    <div id="successState" class="success-panel">
-      <div class="success-icon">✓</div>
-      <h3>WhatsApp Connected!</h3>
-      <p class="description">
-        Your WhatsApp Business number is now linked to CabMind. You're all set!
-      </p>
+      <div id="debugPanel" class="debug">
+        <h4>🔧 Debug Output</h4>
+        <pre id="debugOutput">Waiting...</pre>
+      </div>
 
-      <div class="success-details" id="connectionDetails"></div>
-
-      <button class="dashboard-btn" onclick="window.location.href='https://cabmind.co.uk/dashboard'">
-        Continue to Dashboard →
-      </button>
-    </div>
-
-    <!-- Status Messages -->
-    <div id="statusMessage" class="status"></div>
-
-    <!-- Debug -->
-    <div id="debugPanel" class="debug-panel">
-      <h4>🔧 Debug Mode</h4>
-      <pre id="debugOutput">Waiting for action...</pre>
+      <div class="footer-note">
+        🔒 Secure connection via Meta Embedded Signup<br/>
+        Test webhook → client-signup
+      </div>
     </div>
   </div>
 
-  <div class="powered-by">
-    Powered by <a href="https://cabmind.co.uk" target="_blank" rel="noopener noreferrer">CabMind</a> · AI for Taxi Operators
-  </div>
-</div>
+  <!-- =========================================================
+       CONFIG
+  ========================================================== -->
+  <script>
+    const CONFIG = {
+      appId: "1302145801707701",
+      configId: "1819814595431396",
 
-<!-- Facebook SDK -->
-<script>
-  // ============================================
-  // CONFIGURATION
-  // ============================================
-  const CONFIG = {
-    appId: '1302145801707701',
-    solutionId: '1302145801707701', // replace with real Solution ID when you have it
-    apiVersion: 'v24.0',
-    signupWebhook: 'https://automation.cabmind.co.uk/webhook/client-signup',
-    debug: true
-  };
+      // Use what Meta builder shows
+      apiVersion: "v24.0",
 
-  // ============================================
-  // FACEBOOK SDK INITIALIZATION
-  // ============================================
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId: CONFIG.appId,
-      autoLogAppEvents: true,
-      xfbml: false,
-      version: CONFIG.apiVersion
-    });
+      // If you have a Solution ID, set it here (for testing, same as appId is OK)
+      solutionId: "1302145801707701",
 
-    log('✅ Facebook SDK initialized');
-  };
+      // Your n8n webhook (POST)
+      n8nClientSignupWebhook: "https://automation.cabmind.co.uk/webhook/client-signup",
 
-  (function(d, s, id) {
-    let js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+      // For debugging only
+      debug: true,
+    };
 
-  // ============================================
-  // SAFE MESSAGE EVENT LISTENER
-  // ============================================
-  window.addEventListener('message', function(event) {
-    // Safer check: only accept messages from Meta/Facebook domains
-    const allowedOrigins = [
-      'https://www.facebook.com',
-      'https://facebook.com',
-      'https://web.facebook.com'
-    ];
+    // We store partial data until we have everything we want to send to n8n
+    const SIGNUP_STATE = {
+      code: null,
+      waba_id: null,
+      phone_number_id: null,
+      business_id: null,
+      last_session_event: null,
+    };
+  </script>
 
-    if (!allowedOrigins.includes(event.origin)) return;
+  <!-- =========================================================
+       UI HELPERS
+  ========================================================== -->
+  <script>
+    function showStatus(message, type = "info") {
+      const el = document.getElementById("statusMessage");
+      el.className = "status show " + type;
+      el.textContent = message;
+    }
 
-    try {
-      const data = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
-      log('📨 Message from Meta:\n' + JSON.stringify(data, null, 2));
+    function log(message, obj) {
+      console.log("[CabMind]", message, obj || "");
+      if (!CONFIG.debug) return;
 
-      // Embedded Signup events
-      if (data && data.type === 'WA_EMBEDDED_SIGNUP') {
-        // Coexistence completion event
-        if (data.event === 'FINISH_WHATSAPP_BUSINESS_APP_ONBOARDING') {
-          log('✅ Coexistence onboarding FINISHED event received');
-        }
+      const panel = document.getElementById("debugPanel");
+      const output = document.getElementById("debugOutput");
+      panel.classList.add("show");
 
-        handleSignupComplete(data);
+      if (obj !== undefined) {
+        output.textContent = message + "\n\n" + JSON.stringify(obj, null, 2);
+      } else {
+        output.textContent = message;
+      }
+    }
+
+    function setButtonLoading(isLoading) {
+      const btn = document.getElementById("connectBtn");
+      if (isLoading) {
+        btn.disabled = true;
+        btn.textContent = "Connecting...";
+      } else {
+        btn.disabled = false;
+        btn.textContent = "Connect WhatsApp Business";
+      }
+    }
+
+    function getClientId() {
+      return (document.getElementById("clientId").value || "").trim();
+    }
+  </script>
+
+  <!-- =========================================================
+       LISTEN FOR SESSION INFO EVENTS (Meta postMessage)
+  ========================================================== -->
+  <script>
+    window.addEventListener("message", (event) => {
+      // IMPORTANT: only accept Meta origins
+      if (event.origin !== "https://www.facebook.com" && event.origin !== "https://web.facebook.com") {
         return;
       }
 
-      // fallback if some older formats come through
-      if (data && data.data && data.data.phone_number_id) {
-        handleSignupComplete({ data: data.data });
+      try {
+        const data = JSON.parse(event.data);
+
+        // Always show what we receive
+        log("📨 postMessage received from Meta:", data);
+
+        if (data.type === "WA_EMBEDDED_SIGNUP") {
+          SIGNUP_STATE.last_session_event = data;
+
+          // Normal Embedded Signup event names: FINISH / CANCEL / ERROR
+          if (data.event === "FINISH" || data.event === "FINISH_WHATSAPP_BUSINESS_APP_ONBOARDING") {
+            const payload = data.data || {};
+            SIGNUP_STATE.waba_id = payload.waba_id || SIGNUP_STATE.waba_id;
+            SIGNUP_STATE.phone_number_id = payload.phone_number_id || SIGNUP_STATE.phone_number_id;
+
+            showStatus("✅ Embedded Signup finished. Preparing to send to n8n...", "success");
+            trySendToN8n();
+          }
+
+          if (data.event === "CANCEL") {
+            showStatus("⚠️ Signup cancelled by user.", "warning");
+            setButtonLoading(false);
+          }
+
+          if (data.event === "ERROR") {
+            const payload = data.data || {};
+            showStatus("❌ Embedded Signup error: " + (payload.error_message || "Unknown error"), "error");
+            setButtonLoading(false);
+          }
+        }
+      } catch (e) {
+        // Non-JSON messages are common, ignore
       }
+    });
+  </script>
 
-    } catch (e) {
-      // non-json message, ignore
-    }
-  });
-
-  // ============================================
-  // LAUNCH WHATSAPP EMBEDDED SIGNUP (COEXISTENCE)
-  // ============================================
-  function launchWhatsAppSignup() {
-    const btn = document.getElementById('connectBtn');
-    btn.disabled = true;
-    btn.innerHTML = `
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="M12 6v6l4 2"></path>
-      </svg>
-      Connecting...
-    `;
-
-    showStatus('Opening WhatsApp Business setup...', 'info');
-    log('🚀 Starting Embedded Signup (Coexistence) flow...');
-
-    FB.login(function(response) {
-      log('🔐 FB.login response:\n' + JSON.stringify(response, null, 2));
+  <!-- =========================================================
+       FB LOGIN CALLBACK (AUTH CODE)
+  ========================================================== -->
+  <script>
+    function fbLoginCallback(response) {
+      log("🔐 FB.login callback response:", response);
 
       if (response && response.authResponse) {
-        showStatus('Facebook connected! Complete the WhatsApp setup in the popup window...', 'info');
+        // ✅ This is the authorization code you must exchange server-side
+        SIGNUP_STATE.code = response.authResponse.code || null;
+
+        showStatus("✅ Facebook connected. Complete the WhatsApp steps in the popup...", "info");
+
+        // We might already have enough to send to n8n (sometimes session event comes later)
+        trySendToN8n();
       } else {
-        log('❌ User cancelled or error');
-        showStatus('Connection cancelled. Please try again when ready.', 'error');
-        resetButton();
-      }
-    }, {
-    config_id: "1819814595431396",
-    response_type: "code",
-    override_default_response_type: true,
-    scope: "business_management,whatsapp_business_management,whatsapp_business_messaging",
-    extras: {
-      version: "v3",
-      featureType: "whatsapp_business_app_onboarding",
-      sessionInfoVersion: "3",
-      setup: {
-        solutionID: CONFIG.solutionId
+        showStatus("❌ Login cancelled or failed.", "error");
+        setButtonLoading(false);
       }
     }
-  });
-  }
+  </script>
 
-  // ============================================
-  // HANDLE SIGNUP COMPLETION
-  // ============================================
-  async function handleSignupComplete(eventData) {
-    log('🎉 Processing signup:\n' + JSON.stringify(eventData, null, 2));
+  <!-- =========================================================
+       SEND TO n8n (TEST)
+  ========================================================== -->
+  <script>
+    async function trySendToN8n() {
+      const client_id = getClientId();
 
-    const signupData = {
-      phone_number_id: eventData?.data?.phone_number_id || null,
-      waba_id: eventData?.data?.waba_id || null,
-      business_id: eventData?.data?.business_id || null,
-      display_phone_number: eventData?.data?.display_phone_number || null,
-      event: eventData?.event || null,
-      timestamp: new Date().toISOString(),
-      raw_data: eventData?.data || eventData
-    };
+      if (!client_id) {
+        showStatus("❌ Please enter Client ID first.", "error");
+        setButtonLoading(false);
+        return;
+      }
 
-    if (!signupData.phone_number_id) {
-      showStatus('Setup completed but missing Phone Number ID. Please contact support@cabmind.co.uk', 'warning');
-      log('⚠️ No phone_number_id received');
-      resetButton();
-      return;
+      // Minimum required: client_id + code
+      // waba_id & phone_number_id often come from postMessage FINISH event
+      if (!SIGNUP_STATE.code) {
+        log("⏳ Waiting for code...");
+        return;
+      }
+
+      // Optional: wait for phone_number_id too
+      // If you want strict requirement, uncomment below:
+      // if (!SIGNUP_STATE.phone_number_id) {
+      //   log("⏳ Waiting for phone_number_id from postMessage FINISH...");
+      //   return;
+      // }
+
+      const payload = {
+        client_id,
+        flow_type: "coexistence",
+        code: SIGNUP_STATE.code,
+        waba_id: SIGNUP_STATE.waba_id,
+        phone_number_id: SIGNUP_STATE.phone_number_id,
+        business_id: SIGNUP_STATE.business_id,
+        sdk_version: CONFIG.apiVersion,
+        config_id: CONFIG.configId,
+        timestamp: new Date().toISOString(),
+        raw_session_event: SIGNUP_STATE.last_session_event || null,
+      };
+
+      log("🚀 Sending payload to n8n /client-signup ...", payload);
+      showStatus("🚀 Sending signup data to n8n...", "info");
+
+      try {
+        const res = await fetch(CONFIG.n8nClientSignupWebhook, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const text = await res.text();
+        let json;
+        try { json = JSON.parse(text); } catch { json = { raw: text }; }
+
+        if (!res.ok) {
+          showStatus("❌ n8n error: HTTP " + res.status, "error");
+          log("❌ n8n responded with error:", json);
+          setButtonLoading(false);
+          return;
+        }
+
+        showStatus("✅ Sent to n8n successfully! Check executions tab in n8n.", "success");
+        log("✅ n8n response:", json);
+        setButtonLoading(false);
+
+      } catch (err) {
+        showStatus("❌ Failed to reach n8n webhook. Check URL / CORS / HTTPS.", "error");
+        log("❌ Network error:", { message: err.message });
+        setButtonLoading(false);
+      }
     }
+  </script>
 
-    showStatus('Saving your connection...', 'info');
+  <!-- =========================================================
+       LAUNCH EMBEDDED SIGNUP (Coexistence)
+  ========================================================== -->
+  <script>
+    function launchWhatsAppSignup() {
+      const client_id = getClientId();
+      if (!client_id) {
+        showStatus("❌ Client ID is required before connecting.", "error");
+        return;
+      }
 
-    try {
-      const response = await fetch(CONFIG.signupWebhook, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(signupData)
+      if (!window.FB) {
+        showStatus("❌ Facebook SDK not loaded yet. Please wait 2 seconds and retry.", "error");
+        return;
+      }
+
+      setButtonLoading(true);
+      showStatus("Opening WhatsApp Embedded Signup popup...", "info");
+
+      // Reset state for fresh test run
+      SIGNUP_STATE.code = null;
+      SIGNUP_STATE.waba_id = null;
+      SIGNUP_STATE.phone_number_id = null;
+      SIGNUP_STATE.business_id = null;
+      SIGNUP_STATE.last_session_event = null;
+
+      // ✅ Meta Embedded Signup (Coexistence)
+      FB.login(fbLoginCallback, {
+        config_id: CONFIG.configId,
+        response_type: "code",
+        override_default_response_type: true,
+
+        // Must match Meta builder expectations
+        extras: {
+          version: "v3",
+          featureType: "whatsapp_business_app_onboarding",
+          sessionInfoVersion: 3,
+          setup: {
+            solutionID: CONFIG.solutionId
+          }
+        }
+      });
+    }
+  </script>
+
+  <!-- =========================================================
+       FACEBOOK SDK INIT (Meta Builder style)
+  ========================================================== -->
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: CONFIG.appId,
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: CONFIG.apiVersion
       });
 
-      if (!response.ok) throw new Error('Server error: ' + response.status);
+      log("✅ Facebook SDK initialized (" + CONFIG.apiVersion + ")");
+    };
+  </script>
 
-      const result = await response.json();
-      log('✅ Backend saved:\n' + JSON.stringify(result, null, 2));
-
-      showSuccessState(signupData, result);
-      showStatus('✅ WhatsApp connected successfully!', 'success');
-
-    } catch (error) {
-      log('⚠️ Backend error: ' + error.message);
-
-      // Still show success UI because the WhatsApp connection itself likely worked
-      showSuccessState(signupData, null);
-      showStatus('Connected! (Note: Please contact support to complete setup)', 'warning');
-    }
-  }
-
-  // ============================================
-  // UI HELPERS
-  // ============================================
-  function showSuccessState(signupData, serverResponse) {
-    document.getElementById('initialState').style.display = 'none';
-
-    const successState = document.getElementById('successState');
-    successState.classList.add('show');
-
-    const details = document.getElementById('connectionDetails');
-    details.innerHTML = `
-      <p><strong>Phone Number ID</strong> <span class="value">${signupData.phone_number_id}</span></p>
-      <p><strong>WABA ID</strong> <span class="value">${signupData.waba_id || 'Pending'}</span></p>
-      <p><strong>Business ID</strong> <span class="value">${signupData.business_id || 'Pending'}</span></p>
-      <p><strong>Event</strong> <span class="value">${signupData.event || 'N/A'}</span></p>
-      ${serverResponse?.client_id ? `<p><strong>Client ID</strong> <span class="value">${serverResponse.client_id}</span></p>` : ''}
-      <p><strong>Status</strong> <span class="value" style="color: #166534;">✓ Connected</span></p>
-    `;
-  }
-
-  function showStatus(message, type) {
-    const el = document.getElementById('statusMessage');
-    el.innerHTML = message;
-    el.className = 'status show ' + type;
-  }
-
-  function resetButton() {
-    const btn = document.getElementById('connectBtn');
-    btn.disabled = false;
-    btn.innerHTML = `
-      <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      Connect WhatsApp Business
-    `;
-  }
-
-  function log(message) {
-    console.log('[CabMind]', message);
-    if (CONFIG.debug) {
-      const panel = document.getElementById('debugPanel');
-      const output = document.getElementById('debugOutput');
-      panel.classList.add('show');
-      output.textContent = message;
-    }
-  }
-</script>
+  <script async defer crossorigin="anonymous"
+          src="https://connect.facebook.net/en_US/sdk.js"></script>
 
 </body>
 </html>
