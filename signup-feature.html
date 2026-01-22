@@ -1023,7 +1023,6 @@
                 const url = `${CONFIG.updateConfigWebhook}?client_id=${encodeURIComponent(state.client_id)}`;
 
                 const res = await fetch(url, { method: "GET" });
-                debugger;
                 if (!res.ok) {
                     throw new Error(`Server responded with status ${res.status}`);
                 }
