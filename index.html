@@ -310,6 +310,7 @@
 
         showStatus("✅ Sent to n8n successfully! Check Executions in n8n.", "success");
         log("✅ n8n success response:", json);
+        window.location.href = "./signup-feature.html?client_id="+client_id;
         setButtonLoading(false);
 
       } catch (err) {
