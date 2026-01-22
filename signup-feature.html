@@ -12,7 +12,7 @@
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       min-height: 100vh;
       margin: 0;
       padding: 20px;
@@ -26,6 +26,7 @@
       width: 100%;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
       text-align: center;
+      margin: auto;
     }
 
     .logo {
@@ -61,6 +62,7 @@
       text-align: left;
       font-size: 14px;
       line-height: 1.5;
+      word-break: break-word;
     }
     .status.success {
       display: block;
@@ -103,10 +105,14 @@
       gap: 6px;
       margin-bottom: 14px;
     }
+    .field:last-child {
+      margin-bottom: 0;
+    }
     .field label {
       font-size: 13px;
       color: #333;
       font-weight: 600;
+      line-height: 1.4;
     }
     .field input[type="text"],
     .field input[type="email"],
@@ -116,10 +122,18 @@
       padding: 12px 12px;
       border-radius: 8px;
       border: 1px solid #ddd;
-      font-size: 14px;
+      font-size: 16px;
       outline: none;
       transition: border-color 0.2s;
       background: #fff;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
     }
     .field input:focus,
     .field select:focus {
@@ -131,8 +145,8 @@
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
-    @media (max-width: 540px) {
-      .row-2 { grid-template-columns: 1fr; }
+    .row-2 .field {
+      margin-bottom: 0;
     }
 
     /* Toggle */
@@ -141,7 +155,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 10px 0;
+      padding: 12px 0;
       border-bottom: 1px solid #eaeaea;
     }
     .toggle-row:last-child { border-bottom: none; }
@@ -150,6 +164,8 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
+      flex: 1;
+      min-width: 0;
     }
     .toggle-label span:first-child {
       font-size: 13px;
@@ -165,6 +181,7 @@
       position: relative;
       width: 48px;
       height: 26px;
+      flex-shrink: 0;
     }
     .toggle input {
       display: none;
@@ -201,17 +218,20 @@
       background-color: #25D366;
       color: white;
       border: none;
-      padding: 14px 20px;
+      padding: 16px 20px;
       font-size: 16px;
       font-weight: 700;
       border-radius: 8px;
       cursor: pointer;
       width: 100%;
       transition: background-color 0.2s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn:hover {
       background-color: #1da851;
-      transform: translateY(-1px);
+    }
+    .btn:active {
+      transform: scale(0.98);
     }
     .btn:disabled {
       background-color: #bbb;
@@ -226,37 +246,6 @@
       padding-top: 16px;
       border-top: 1px solid #eee;
       line-height: 1.5;
-    }
-
-    .small-muted {
-      font-size: 12px;
-      color: #888;
-      margin-top: 8px;
-      text-align: left;
-    }
-
-    /* Debug */
-    .debug-panel {
-      margin-top: 18px;
-      padding: 16px;
-      background: #1a1a2e;
-      border-radius: 10px;
-      text-align: left;
-      display: none;
-    }
-    .debug-panel.show { display: block; }
-    .debug-panel h4 {
-      color: #25D366;
-      margin: 0 0 10px 0;
-      font-size: 14px;
-    }
-    .debug-panel pre {
-      color: #fff;
-      font-size: 12px;
-      overflow-x: auto;
-      margin: 0;
-      white-space: pre-wrap;
-      word-wrap: break-word;
     }
 
     /* Password overlay */
@@ -286,10 +275,13 @@
     }
     .lock-row input {
       flex: 1;
+      min-width: 0;
       padding: 12px 12px;
       border-radius: 8px;
       border: 1px solid #ddd;
-      font-size: 14px;
+      font-size: 16px;
+      -webkit-appearance: none;
+      appearance: none;
     }
     .lock-row button {
       background: #667eea;
@@ -299,12 +291,14 @@
       padding: 12px 14px;
       border-radius: 8px;
       cursor: pointer;
-      min-width: 100px;
+      min-width: 90px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       transition: background-color 0.2s;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
     }
     .lock-row button:hover {
       background: #5a6de0;
@@ -353,6 +347,157 @@
       color: #555;
       font-size: 14px;
       margin: 0;
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 540px) {
+      body {
+        padding: 12px;
+        align-items: flex-start;
+      }
+      
+      .card {
+        padding: 24px 18px;
+        border-radius: 12px;
+      }
+      
+      .logo {
+        font-size: 26px;
+      }
+      
+      .tagline {
+        font-size: 13px;
+        margin-bottom: 16px;
+      }
+      
+      h2 {
+        font-size: 20px;
+      }
+      
+      .description {
+        font-size: 13px;
+      }
+      
+      .status {
+        padding: 12px;
+        font-size: 13px;
+      }
+      
+      .section {
+        padding: 14px;
+        margin-top: 16px;
+      }
+      
+      .section-title {
+        font-size: 14px;
+      }
+      
+      .row-2 { 
+        grid-template-columns: 1fr; 
+        gap: 0;
+      }
+      .row-2 .field { 
+        margin-bottom: 14px; 
+      }
+      .row-2 .field:last-child { 
+        margin-bottom: 0; 
+      }
+      
+      .field label {
+        font-size: 12px;
+      }
+      
+      .toggle-row {
+        padding: 10px 0;
+        gap: 10px;
+      }
+      
+      .toggle-label span:first-child {
+        font-size: 12px;
+      }
+      .toggle-label span:last-child {
+        font-size: 11px;
+      }
+      
+      .toggle {
+        width: 44px;
+        height: 24px;
+      }
+      .toggle .slider:before {
+        height: 18px;
+        width: 18px;
+      }
+      .toggle input:checked + .slider:before {
+        transform: translateX(20px);
+      }
+      
+      .lock-overlay {
+        padding: 14px;
+      }
+      
+      .lock-title {
+        font-size: 15px;
+      }
+      
+      .lock-desc {
+        font-size: 12px;
+      }
+      
+      .lock-row {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .lock-row input {
+        width: 100%;
+      }
+      
+      .lock-row button {
+        width: 100%;
+        min-width: unset;
+        padding: 14px;
+      }
+      
+      .btn {
+        padding: 14px 16px;
+        font-size: 15px;
+      }
+      
+      .note {
+        font-size: 11px;
+      }
+      
+      .loading-overlay {
+        padding: 40px 16px;
+      }
+      
+      .loading-overlay .loader {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .loading-overlay p {
+        font-size: 13px;
+      }
+    }
+    
+    /* Extra small screens */
+    @media (max-width: 360px) {
+      body {
+        padding: 8px;
+      }
+      
+      .card {
+        padding: 20px 14px;
+      }
+      
+      .logo {
+        font-size: 24px;
+      }
+      
+      .section {
+        padding: 12px;
+      }
     }
   </style>
 </head>
@@ -415,8 +560,8 @@
         </div>
 
         <div class="field">
-          <label>Admin Name</label>
-          <input type="text" id="admin_name" placeholder="Eg. Hardik" />
+          <label>Contact Name</label>
+          <input type="text" id="admin_name" placeholder="Eg. Operations Manager" />
         </div>
       </div>
 
@@ -465,21 +610,21 @@
       <div class="row-2" style="margin-top:14px;">
         <div class="field">
           <label>Booking Modification Cutoff (minutes)</label>
-          <input type="number" id="booking_modification_cutoff_min" min="0" step="1" />
+          <input type="number" id="booking_modification_cutoff_min" min="0" step="1" placeholder="60" />
         </div>
 
         <div class="field">
           <label>ASAP Interval (minutes)</label>
-          <input type="number" id="asap_interval_min" min="0" step="1" />
+          <input type="number" id="asap_interval_min" min="0" step="1" placeholder="60" />
         </div>
       </div>
 
-      <div class="field">
+      <div class="field" style="margin-top:14px;">
         <label>ASAP Mode</label>
         <select id="asap_mode">
-          <option value="approval">approval</option>
-          <option value="reject">reject</option>
-          <option value="auto_accept">auto_accept</option>
+          <option value="approval">Approval Required</option>
+          <option value="reject">Reject ASAP Bookings</option>
+          <option value="auto_accept">Auto Accept</option>
         </select>
       </div>
 
@@ -506,12 +651,12 @@
       <div class="row-2">
         <div class="field">
           <label>Working Hour Start (0-24)</label>
-          <input type="number" id="working_hour_start" min="0" max="24" step="1" />
+          <input type="number" id="working_hour_start" min="0" max="24" step="1" placeholder="9" />
         </div>
 
         <div class="field">
           <label>Working Hour End (0-24)</label>
-          <input type="number" id="working_hour_end" min="0" max="24" step="1" />
+          <input type="number" id="working_hour_end" min="0" max="24" step="1" placeholder="24" />
         </div>
       </div>
     </div>
@@ -523,19 +668,12 @@
       ⚠️ This page works only after redirect from WhatsApp connection flow.
     </p>
   </form>
-
-  <!-- Debug Panel -->
-  <div id="debugPanel" class="debug-panel">
-    <h4>📋 Debug</h4>
-    <pre id="debugOutput">Ready...</pre>
-  </div>
 </div>
 
 <script>
   // ✅ CONFIG
   const CONFIG = {
     updateConfigWebhook: "https://automation.cabmind.co.uk/webhook/update-config",
-    debug: true,
     password: "Cabmind@123",
   };
 
@@ -573,12 +711,10 @@
 
     if (!state.client_id) {
       showStatus("❌ Missing client_id. This page can only be opened after successful signup redirect.", "error");
-      updateDebug("No client_id in URL.");
       return;
     }
 
     showStatus("🔒 Please unlock to load configuration.", "info");
-    updateDebug("client_id = " + state.client_id);
   })();
 
   // Handle Enter key on password input
@@ -615,43 +751,88 @@
 
     showStatus("✅ Access granted. Loading your current configuration...", "success");
 
-    await loadConfig();
+    const success = await loadConfig();
 
-    // Hide loading overlay and show form
-    document.getElementById("loadingOverlay").classList.remove("show");
-    document.getElementById("configForm").style.display = "block";
+    // Only show form if config loaded successfully
+    if (success) {
+      // Hide loading overlay and show form
+      document.getElementById("loadingOverlay").classList.remove("show");
+      document.getElementById("configForm").style.display = "block";
+    }
   }
 
   // Load config from webhook (GET)
   async function loadConfig() {
     try {
       const url = `${CONFIG.updateConfigWebhook}?client_id=${encodeURIComponent(state.client_id)}`;
-      updateDebug("GET " + url);
 
       const res = await fetch(url, { method: "GET" });
 
-      let data = null;
-      try { data = await res.json(); } catch(e) {}
+      if (!res.ok) {
+        throw new Error(`Server responded with status ${res.status}`);
+      }
 
-      updateDebug("GET response:\n" + JSON.stringify(data, null, 2));
+      let data = null;
+      try { data = await res.json(); } catch(e) {
+        throw new Error("Invalid response from server");
+      }
+
+      // Check if response indicates an error
+      if (data && data.ok === false) {
+        throw new Error(data.message || "Failed to load configuration");
+      }
 
       // Expected formats:
       // 1) { ok:true, config:{...} }
       // 2) { ...configFields }
-      let config = DEFAULT_CONFIG;
+      // 3) Array with config object
+      let config = { ...DEFAULT_CONFIG };
 
       if (data && typeof data === "object") {
-        if (data.config && typeof data.config === "object") config = { ...DEFAULT_CONFIG, ...data.config };
-        else config = { ...DEFAULT_CONFIG, ...data };
+        // Handle array response - take first item
+        if (Array.isArray(data) && data.length > 0) {
+          data = data[0];
+        }
+        
+        if (data.config && typeof data.config === "object") {
+          config = { ...DEFAULT_CONFIG, ...data.config };
+        } else {
+          config = { ...DEFAULT_CONFIG, ...data };
+        }
       }
 
       populateForm(config);
       showStatus("✅ Config loaded successfully.", "success");
+      return true;
     } catch (err) {
-      showStatus("⚠️ Failed to load from server. Using default config.", "error");
-      updateDebug("Load error: " + err.message);
-      populateForm(DEFAULT_CONFIG);
+      showStatus("❌ Failed to load configuration: " + err.message + ". Please try again.", "error");
+      resetToPasswordScreen();
+      return false;
     }
+  }
+
+  // Reset back to password screen on failure
+  function resetToPasswordScreen() {
+    state.unlocked = false;
+    
+    // Hide loading overlay and form
+    document.getElementById("loadingOverlay").classList.remove("show");
+    document.getElementById("configForm").style.display = "none";
+    
+    // Show lock overlay again
+    const lockOverlay = document.getElementById("lockOverlay");
+    lockOverlay.style.display = "block";
+    
+    // Reset unlock button state
+    const unlockBtn = document.getElementById("unlockBtn");
+    const unlockBtnText = document.getElementById("unlockBtnText");
+    const unlockSpinner = document.getElementById("unlockSpinner");
+    unlockBtn.disabled = false;
+    unlockBtnText.textContent = "Unlock";
+    unlockSpinner.style.display = "none";
+    
+    // Clear password input
+    document.getElementById("passwordInput").value = "";
   }
 
   // Submit config to webhook (POST)
@@ -664,7 +845,6 @@
 
     try {
       const payload = buildPayloadFromForm();
-      updateDebug("POST payload:\n" + JSON.stringify(payload, null, 2));
 
       const res = await fetch(CONFIG.updateConfigWebhook, {
         method: "POST",
@@ -673,7 +853,6 @@
       });
 
       const data = await res.json();
-      updateDebug("POST response:\n" + JSON.stringify(data, null, 2));
 
       if (data.ok === true) {
         showStatus("✅ Configuration saved successfully!", "success");
@@ -682,7 +861,6 @@
       }
     } catch (err) {
       showStatus("❌ Failed to save: " + err.message, "error");
-      updateDebug("Submit error: " + err.message);
     } finally {
       btn.disabled = false;
       btn.textContent = "Save Configuration";
@@ -701,13 +879,13 @@
     setToggle("enable_cancel_booking", toBool(cfg.enable_cancel_booking));
     setToggle("enable_inquiry", toBool(cfg.enable_inquiry));
 
-    setValue("booking_modification_cutoff_min", cfg.booking_modification_cutoff_min);
-    setValue("asap_interval_min", cfg.asap_interval_min);
+    setNumberValue("booking_modification_cutoff_min", cfg.booking_modification_cutoff_min);
+    setNumberValue("asap_interval_min", cfg.asap_interval_min);
     setValue("asap_mode", cfg.asap_mode);
 
     setValue("dispatch_provider", cfg.dispatch_provider);
-    setValue("working_hour_start", cfg.working_hour_start);
-    setValue("working_hour_end", cfg.working_hour_end);
+    setNumberValue("working_hour_start", cfg.working_hour_start);
+    setNumberValue("working_hour_end", cfg.working_hour_end);
 
     setToggle("inform_user", toBool(cfg.inform_user));
   }
@@ -763,6 +941,18 @@
     el.value = val ?? "";
   }
 
+  function setNumberValue(id, val) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    // Convert to number and handle null/undefined
+    const numVal = Number(val);
+    if (val !== null && val !== undefined && val !== "" && !Number.isNaN(numVal)) {
+      el.value = numVal;
+    } else {
+      el.value = "";
+    }
+  }
+
   function getValue(id) {
     const el = document.getElementById(id);
     return el ? (el.value || "").trim() : "";
@@ -790,14 +980,6 @@
     const statusEl = document.getElementById("statusMessage");
     statusEl.innerHTML = message;
     statusEl.className = "status " + type;
-  }
-
-  function updateDebug(message) {
-    if (!CONFIG.debug) return;
-    const debugPanel = document.getElementById("debugPanel");
-    const debugOutput = document.getElementById("debugOutput");
-    debugPanel.classList.add("show");
-    debugOutput.textContent = message;
   }
 </script>
 
