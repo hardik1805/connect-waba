@@ -2,426 +2,240 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Connect WhatsApp Business - CabMind</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Connect your WhatsApp Business to CabMind AI-powered taxi booking system" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Cabmind - Connect WhatsApp</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .card {
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 16px;
-      max-width: 520px;
-      width: 100%;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      text-align: center;
-    }
-
-    .logo {
-      font-size: 32px;
-      font-weight: 700;
-      color: #1a1a2e;
-      margin-bottom: 8px;
-    }
-
-    .tagline {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 26px;
-    }
-
-    h2 {
-      color: #1a1a2e;
-      margin-bottom: 10px;
-      font-size: 24px;
-    }
-
-    .description {
-      font-size: 15px;
-      color: #555;
-      margin-bottom: 22px;
-      line-height: 1.6;
-    }
-
-    .field {
-      margin: 18px 0 18px;
-      text-align: left;
-    }
-
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      color: #334155;
-      margin-bottom: 8px;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 14px 14px;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      font-size: 14px;
-      outline: none;
-    }
-
-    input[type="text"]:focus {
-      border-color: #4c51bf;
-      box-shadow: 0 0 0 3px rgba(76,81,191,0.15);
-    }
-
-    .features {
-      text-align: left;
-      margin: 18px 0 24px;
-      padding: 18px;
-      background: #f8f9fa;
-      border-radius: 10px;
-    }
-
-    .features li {
-      padding: 8px 0;
-      color: #444;
-      font-size: 14px;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .features li::before {
-      content: "✓";
-      color: #25D366;
-      font-weight: bold;
-    }
-
-    .connect-btn {
-      background-color: #25D366;
-      color: white;
-      border: none;
-      padding: 16px 24px;
-      font-size: 17px;
-      font-weight: 600;
-      border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: background-color 0.2s, transform 0.1s;
-    }
-
-    .connect-btn:hover {
-      background-color: #1da851;
-      transform: translateY(-1px);
-    }
-
-    .connect-btn:active {
-      transform: translateY(0);
-    }
-
-    .connect-btn:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .connect-btn svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .note {
-      font-size: 13px;
-      color: #888;
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid #eee;
-      line-height: 1.6;
-    }
-
-    .status {
-      margin-top: 18px;
-      padding: 14px;
-      border-radius: 12px;
-      display: none;
-      font-size: 13px;
-      line-height: 1.6;
-      text-align: left;
-    }
-
-    .status.show {
-      display: block;
-    }
-
-    .status.info {
-      background: #d1ecf1;
-      color: #0c5460;
-      border: 1px solid #bee5eb;
-    }
-
-    .status.success {
-      background: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-    }
-
-    .status.error {
-      background: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-    }
-
-    .status.warning {
-      background: #fff3cd;
-      color: #856404;
-      border: 1px solid #ffeeba;
-    }
+    body { font-family: Arial, sans-serif; background:#f6f7fb; margin:0; padding:0; }
+    .wrap { max-width: 720px; margin: 40px auto; background:#fff; padding: 24px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    h1 { margin: 0 0 10px; font-size: 22px; }
+    p { color:#444; }
+    label { font-weight: bold; display:block; margin-top: 16px; }
+    input { width:100%; padding: 12px; margin-top: 6px; border:1px solid #ddd; border-radius: 8px; font-size: 15px; }
+    button { margin-top: 16px; padding: 12px 16px; border:0; border-radius: 10px; background:#1877f2; color:#fff; font-weight:bold; cursor:pointer; font-size: 15px; }
+    button:disabled { background:#9bbcf9; cursor:not-allowed; }
+    pre { background:#0b1020; color:#e9eefc; padding: 12px; border-radius: 10px; overflow:auto; font-size: 12px; }
+    .row { display:flex; gap:10px; margin-top: 14px; }
+    .pill { background:#f1f5ff; color:#1a3a8a; padding: 6px 10px; border-radius: 999px; font-size: 12px; display:inline-block; }
+    .success { background:#e9fff0; color:#0b6b2d; }
+    .error { background:#ffecec; color:#9b111e; }
   </style>
 </head>
 
 <body>
+  <div class="wrap">
+    <h1>Connect WhatsApp Business</h1>
+    <p class="pill">Coexistence Enabled • Meta Embedded Signup v3 • sessionInfoVersion=3</p>
 
-  <div class="card">
-    <div class="logo">🚕 CabMind</div>
-    <div class="tagline">AI-Powered Communication for Taxi Operators</div>
+    <label>Client ID (required)</label>
+    <input id="client_id" placeholder="e.g. aa_hendon" />
 
-    <h2>Connect Your WhatsApp</h2>
+    <button id="btn" onclick="startSignup()">Connect WhatsApp Business</button>
 
-    <p class="description">
-      Link your WhatsApp Business number to enable automated bookings,
-      customer support, and real-time updates.
-    </p>
-
-    <div class="field">
-      <label for="clientId">Client ID (required)</label>
-      <input id="clientId" type="text" placeholder="e.g. aa_hendon" />
+    <div class="row">
+      <span id="status" class="pill">Idle</span>
     </div>
 
-    <ul class="features">
-      <li>Keep using your WhatsApp Business App normally</li>
-      <li>Automated booking confirmations</li>
-      <li>24/7 AI-powered customer support</li>
-      <li>Real-time ride updates to customers</li>
-    </ul>
-
-    <div id="fb-root"></div>
-
-    <button class="connect-btn" id="connectBtn" onclick="launchWhatsAppSignup()">
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      Connect WhatsApp Business
-    </button>
-
-    <div id="statusMessage" class="status"></div>
-
-    <p class="note">
-      🔒 Secure connection via Meta Embedded Signup<br>
-      Webhook: /client-signup (n8n)
-    </p>
+    <h3>Debug Log</h3>
+    <pre id="log">{}</pre>
   </div>
 
   <script>
-    // ✅ Keep values EXACTLY like Meta builder (working)
     const CONFIG = {
-      appId: "1302145801707701",
-      configId: "1819814595431396",
-      apiVersion: "v24.0",
-      n8nWebhook: "https://automation.cabmind.co.uk/webhook/client-signup",
-      debug: false
+      app_id: "1302145801707701",
+      config_id: "1819814595431396",
+      api_version: "v24.0",
+      featureType: "whatsapp_business_app_onboarding",
+      sessionInfoVersion: "3",
+      es_version: "v3",
+
+      // ✅ n8n webhook (client signup)
+      n8n_signup_url: "https://automation.cabmind.co.uk/webhook/client-signup"
     };
 
-    // Store latest data we capture (same as tested)
-    const STATE = {
+    let signupState = {
+      client_id: null,
       code: null,
       waba_id: null,
       phone_number_id: null,
-      last_post_message: null,
-      last_sdk_response: null
+      business_id: null,
+      raw_post_message: null,
+      raw_fb_response: null,
+      timestamp: null
     };
 
-    function showStatus(message, type = "info") {
-      const el = document.getElementById("statusMessage");
-      el.className = "status show " + type;
-      el.textContent = message;
+    function setStatus(text, type="") {
+      const el = document.getElementById("status");
+      el.textContent = text;
+      el.className = "pill " + (type || "");
     }
 
-    function setButtonLoading(loading) {
-      const btn = document.getElementById("connectBtn");
-      btn.disabled = loading;
-      btn.textContent = loading ? "Connecting..." : "Connect WhatsApp Business";
+    function log(obj) {
+      document.getElementById("log").textContent = JSON.stringify(obj, null, 2);
     }
 
-    function getClientId() {
-      return (document.getElementById("clientId").value || "").trim();
-    }
-
-    async function sendToN8n() {
-      const client_id = getClientId();
-      if (!client_id) {
-        showStatus("❌ Please enter Client ID first.", "error");
-        setButtonLoading(false);
-        return;
-      }
-
-      if (!STATE.code) {
-        return; // wait for code
-      }
-
-      const payload = {
-        client_id,
-        code: STATE.code,
-        waba_id: STATE.waba_id,
-        phone_number_id: STATE.phone_number_id,
-        timestamp: new Date().toISOString(),
-        config_id: CONFIG.configId,
-        api_version: CONFIG.apiVersion,
-        raw_post_message: STATE.last_post_message,
-        raw_sdk_response: STATE.last_sdk_response
-      };
-
-      showStatus("🚀 Sending signup info to CabMind...", "info");
-
-      try {
-        const res = await fetch(CONFIG.n8nWebhook, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-
-        const text = await res.text();
-        let json;
-        try { json = JSON.parse(text); } catch { json = { raw: text }; }
-
-        if (!res.ok) {
-          showStatus("❌ n8n returned error HTTP " + res.status, "error");
-          setButtonLoading(false);
-          return;
-        }
-
-        showStatus("✅ Sent successfully! You can close this page.", "success");
-        setButtonLoading(false);
-
-      } catch (err) {
-        showStatus("❌ Failed to call n8n webhook (network/CORS/SSL).", "error");
-        setButtonLoading(false);
-      }
-    }
-
-    // ✅ EXACT SAME postMessage listener as Meta sample (with our storage)
+    // ✅ Receive postMessage from Meta (session info)
     window.addEventListener("message", (event) => {
-      if (event.origin !== "https://www.facebook.com" && event.origin !== "https://web.facebook.com") {
-        return;
-      }
+      if (event.origin !== "https://www.facebook.com" && event.origin !== "https://web.facebook.com") return;
 
       try {
         const data = JSON.parse(event.data);
-        STATE.last_post_message = data;
 
-        if (data.type === "WA_EMBEDDED_SIGNUP") {
-          if (data.event === "FINISH") {
-            const { phone_number_id, waba_id } = data.data || {};
-            STATE.phone_number_id = phone_number_id || null;
-            STATE.waba_id = waba_id || null;
+        if (data?.type === "WA_EMBEDDED_SIGNUP") {
+          signupState.raw_post_message = data;
 
-            showStatus("✅ WhatsApp connected. Sending to CabMind...", "success");
-            sendToN8n();
+          if (data.event === "FINISH" || data.event === "FINISH_WHATSAPP_BUSINESS_APP_ONBOARDING") {
+            signupState.waba_id = data.data?.waba_id;
+            signupState.phone_number_id = data.data?.phone_number_id;
+            signupState.business_id = data.data?.business_id;
+            signupState.timestamp = new Date().toISOString();
 
-          } else if (data.event === "CANCEL") {
-            showStatus("⚠️ Signup cancelled by user.", "warning");
-            setButtonLoading(false);
+            setStatus("Embedded signup finished ✅", "success");
+            log(signupState);
 
-          } else if (data.event === "ERROR") {
-            showStatus("❌ Embedded Signup Error: " + (data.data?.error_message || "Unknown"), "error");
-            setButtonLoading(false);
+            // ✅ Try submit if code is already captured
+            trySubmitToN8n();
+          }
+
+          if (data.event === "CANCEL") {
+            setStatus("User cancelled flow", "error");
+            log({ cancel: data });
+          }
+
+          if (data.event === "ERROR") {
+            setStatus("Embedded Signup error", "error");
+            log({ error: data });
           }
         }
-      } catch {
-        // ignore non-JSON
+      } catch (e) {
+        // ignore non-json
       }
     });
 
-    // ✅ EXACT SAME callback pattern as Meta sample
-    const fbLoginCallback = (response) => {
-      STATE.last_sdk_response = response;
+    function validateClientId(str) {
+      return /^[a-z0-9_]+$/.test(str);
+    }
 
-      if (response.authResponse) {
-        STATE.code = response.authResponse.code || null;
+    function startSignup() {
+      const clientId = document.getElementById("client_id").value.trim();
 
-        showStatus("✅ Facebook connected. Finish WhatsApp steps in popup...", "info");
-        sendToN8n();
-      } else {
-        showStatus("❌ User cancelled login or login failed.", "error");
-        setButtonLoading(false);
+      if (!clientId) {
+        alert("Client ID is required");
+        return;
       }
-    };
-
-    // ✅ Launch Embedded Signup (keep extras EXACTLY same as your working sample)
-    const launchWhatsAppSignup = () => {
-      const client_id = getClientId();
-      if (!client_id) {
-        showStatus("❌ Client ID required before connecting.", "error");
+      if (!validateClientId(clientId)) {
+        alert("Client ID must be lowercase and only use letters/numbers/_");
         return;
       }
 
-      if (!window.FB) {
-        showStatus("❌ Facebook SDK not loaded yet. Wait 2 seconds and retry.", "error");
-        return;
-      }
+      signupState.client_id = clientId;
+      signupState.timestamp = new Date().toISOString();
 
-      setButtonLoading(true);
-      showStatus("Opening Meta Embedded Signup popup...", "info");
+      setStatus("Opening Meta popup...", "");
+      log(signupState);
 
-      // Reset state each run
-      STATE.code = null;
-      STATE.waba_id = null;
-      STATE.phone_number_id = null;
-      STATE.last_post_message = null;
-      STATE.last_sdk_response = null;
+      document.getElementById("btn").disabled = true;
 
+      // ✅ Launch embedded signup popup
       FB.login(fbLoginCallback, {
-        config_id: CONFIG.configId,
+        config_id: CONFIG.config_id,
         response_type: "code",
         override_default_response_type: true,
         extras: {
-          version: "v3",
-          featureType: "whatsapp_business_app_onboarding",
-          sessionInfoVersion: "3"
+          version: CONFIG.es_version,
+          sessionInfoVersion: CONFIG.sessionInfoVersion,
+          featureType: CONFIG.featureType
         }
       });
-    };
+    }
 
-    // ✅ SDK init (same as builder)
-    window.fbAsyncInit = function () {
+    function fbLoginCallback(response) {
+      signupState.raw_fb_response = response;
+
+      // ✅ Capture authorization code
+      if (response?.authResponse?.code) {
+        signupState.code = response.authResponse.code;
+        setStatus("Auth code received ✅", "success");
+        log(signupState);
+
+        // ✅ Try submit if FINISH already came
+        trySubmitToN8n();
+      } else {
+        setStatus("No auth code received", "error");
+        log(response);
+        document.getElementById("btn").disabled = false;
+      }
+    }
+
+    async function trySubmitToN8n() {
+      // We need BOTH:
+      // 1) code from FB.login callback
+      // 2) waba_id + phone_number_id from postMessage
+
+      if (!signupState.client_id) return;
+      if (!signupState.code) return;
+      if (!signupState.waba_id || !signupState.phone_number_id) return;
+
+      setStatus("Sending details to Cabmind (n8n)...", "");
+
+      try {
+        const res = await fetch(CONFIG.n8n_signup_url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            client_id: signupState.client_id,
+            code: signupState.code,
+            waba_id: signupState.waba_id,
+            phone_number_id: signupState.phone_number_id,
+            business_id: signupState.business_id,
+            config_id: CONFIG.config_id,
+            api_version: CONFIG.api_version,
+            timestamp: signupState.timestamp,
+            raw_post_message: signupState.raw_post_message,
+            raw_fb_response: signupState.raw_fb_response
+          })
+        });
+
+        const data = await res.json();
+        log({ signupState, n8n_response: data });
+
+        if (data?.ok) {
+          setStatus("✅ Connected successfully!", "success");
+
+          // ✅ Redirect to config form page
+          if (data.redirect_url) {
+            window.location.href = data.redirect_url;
+            return;
+          }
+
+          // fallback
+          alert("Connected successfully but no redirect_url returned from n8n");
+        } else {
+          setStatus("❌ n8n rejected request", "error");
+          alert(data?.message || "Client signup failed");
+        }
+
+      } catch (e) {
+        setStatus("❌ Failed to contact n8n", "error");
+        alert("Error sending data to n8n: " + e.message);
+      } finally {
+        document.getElementById("btn").disabled = false;
+      }
+    }
+  </script>
+
+  <!-- ✅ Meta JS SDK -->
+  <script>
+    window.fbAsyncInit = function() {
       FB.init({
-        appId: CONFIG.appId,
+        appId: "1302145801707701",
         autoLogAppEvents: true,
         xfbml: true,
-        version: CONFIG.apiVersion
+        version: "v24.0"
       });
     };
   </script>
-
   <script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/en_US/sdk.js">
-  </script>
-
+    src="https://connect.facebook.net/en_US/sdk.js"></script>
 </body>
 </html>
