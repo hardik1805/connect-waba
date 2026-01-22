@@ -1,987 +1,1260 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>CabMind Setup - Features</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <title>CabMind Setup - Features</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    .card {
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 16px;
-      max-width: 560px;
-      width: 100%;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      text-align: center;
-      margin: auto;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
 
-    .logo {
-      font-size: 32px;
-      font-weight: 700;
-      color: #1a1a2e;
-      margin-bottom: 8px;
-    }
-    .tagline {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 22px;
-    }
+        .card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 560px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            margin: auto;
+        }
 
-    h2 {
-      color: #1a1a2e;
-      margin-bottom: 10px;
-      font-size: 22px;
-    }
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
 
-    .description {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 18px;
-      line-height: 1.6;
-    }
+        .tagline {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
 
-    .status {
-      margin-top: 18px;
-      padding: 14px;
-      border-radius: 8px;
-      display: none;
-      text-align: left;
-      font-size: 14px;
-      line-height: 1.5;
-      word-break: break-word;
-    }
-    .status.success {
-      display: block;
-      background: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-    }
-    .status.error {
-      display: block;
-      background: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-    }
-    .status.info {
-      display: block;
-      background: #d1ecf1;
-      color: #0c5460;
-      border: 1px solid #bee5eb;
-    }
+        h2 {
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
 
-    .section {
-      text-align: left;
-      margin-top: 20px;
-      padding: 18px;
-      background: #f8f9fa;
-      border-radius: 10px;
-      border: 1px solid #eee;
-    }
+        .description {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
 
-    .section-title {
-      margin: 0 0 12px 0;
-      color: #1a1a2e;
-      font-size: 15px;
-      font-weight: 700;
-    }
+        .status {
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 8px;
+            display: none;
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.5;
+            word-break: break-word;
+        }
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 14px;
-    }
-    .field:last-child {
-      margin-bottom: 0;
-    }
-    .field label {
-      font-size: 13px;
-      color: #333;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-    .field input[type="text"],
-    .field input[type="email"],
-    .field input[type="number"],
-    .field select {
-      width: 100%;
-      padding: 12px 12px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      font-size: 16px;
-      outline: none;
-      transition: border-color 0.2s;
-      background: #fff;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-    .field select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      padding-right: 36px;
-    }
-    .field input:focus,
-    .field select:focus {
-      border-color: #667eea;
-    }
+        .status.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
 
-    .row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .row-2 .field {
-      margin-bottom: 0;
-    }
+        .status.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
 
-    /* Toggle */
-    .toggle-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid #eaeaea;
-    }
-    .toggle-row:last-child { border-bottom: none; }
+        .status.info {
+            display: block;
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
 
-    .toggle-label {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      flex: 1;
-      min-width: 0;
-    }
-    .toggle-label span:first-child {
-      font-size: 13px;
-      color: #222;
-      font-weight: 600;
-    }
-    .toggle-label span:last-child {
-      font-size: 12px;
-      color: #666;
-    }
+        .section {
+            text-align: left;
+            margin-top: 20px;
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #eee;
+        }
 
-    .toggle {
-      position: relative;
-      width: 48px;
-      height: 26px;
-      flex-shrink: 0;
-    }
-    .toggle input {
-      display: none;
-    }
-    .toggle .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #ccc;
-      transition: 0.25s;
-      border-radius: 999px;
-    }
-    .toggle .slider:before {
-      content: "";
-      position: absolute;
-      height: 20px;
-      width: 20px;
-      left: 3px;
-      top: 3px;
-      background-color: white;
-      transition: 0.25s;
-      border-radius: 50%;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-    .toggle input:checked + .slider {
-      background-color: #25D366;
-    }
-    .toggle input:checked + .slider:before {
-      transform: translateX(22px);
-    }
+        .section-title {
+            margin: 0 0 12px 0;
+            color: #1a1a2e;
+            font-size: 15px;
+            font-weight: 700;
+        }
 
-    .btn {
-      margin-top: 18px;
-      background-color: #25D366;
-      color: white;
-      border: none;
-      padding: 16px 20px;
-      font-size: 16px;
-      font-weight: 700;
-      border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
-      transition: background-color 0.2s, transform 0.1s;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .btn:hover {
-      background-color: #1da851;
-    }
-    .btn:active {
-      transform: scale(0.98);
-    }
-    .btn:disabled {
-      background-color: #bbb;
-      cursor: not-allowed;
-      transform: none;
-    }
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
 
-    .note {
-      font-size: 12px;
-      color: #888;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid #eee;
-      line-height: 1.5;
-    }
+        .field:last-child {
+            margin-bottom: 0;
+        }
 
-    /* Password overlay */
-    .lock-overlay {
-      background: rgba(255,255,255,0.96);
-      border: 1px solid #eee;
-      border-radius: 12px;
-      padding: 18px;
-      margin-top: 18px;
-      text-align: left;
-    }
-    .lock-title {
-      font-weight: 800;
-      color: #1a1a2e;
-      margin-bottom: 6px;
-    }
-    .lock-desc {
-      font-size: 13px;
-      color: #555;
-      margin-bottom: 12px;
-      line-height: 1.5;
-    }
-    .lock-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .lock-row input {
-      flex: 1;
-      min-width: 0;
-      padding: 12px 12px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      font-size: 16px;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-    .lock-row button {
-      background: #667eea;
-      border: none;
-      color: white;
-      font-weight: 700;
-      padding: 12px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      min-width: 90px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: background-color 0.2s;
-      flex-shrink: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .lock-row button:hover {
-      background: #5a6de0;
-    }
-    .lock-row button:disabled {
-      background: #bbb;
-      cursor: not-allowed;
-    }
+        .field label {
+            font-size: 13px;
+            color: #333;
+            font-weight: 600;
+            line-height: 1.4;
+        }
 
-    /* Loading Spinner */
-    .spinner {
-      width: 16px;
-      height: 16px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+        .field input[type="text"],
+        .field input[type="email"],
+        .field input[type="number"],
+        .field select {
+            width: 100%;
+            padding: 12px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+            background: #fff;
+            -webkit-appearance: none;
+            appearance: none;
+        }
 
-    /* Loading overlay for form */
-    .loading-overlay {
-      display: none;
-      position: relative;
-      padding: 60px 20px;
-      text-align: center;
-      background: #f8f9fa;
-      border-radius: 12px;
-      margin-top: 18px;
-    }
-    .loading-overlay.show {
-      display: block;
-    }
-    .loading-overlay .loader {
-      width: 50px;
-      height: 50px;
-      border: 4px solid #e0e0e0;
-      border-top-color: #667eea;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 16px;
-    }
-    .loading-overlay p {
-      color: #555;
-      font-size: 14px;
-      margin: 0;
-    }
+        .field select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+        }
 
-    /* Mobile Responsive Styles */
-    @media (max-width: 540px) {
-      body {
-        padding: 12px;
-        align-items: flex-start;
-      }
-      
-      .card {
-        padding: 24px 18px;
-        border-radius: 12px;
-      }
-      
-      .logo {
-        font-size: 26px;
-      }
-      
-      .tagline {
-        font-size: 13px;
-        margin-bottom: 16px;
-      }
-      
-      h2 {
-        font-size: 20px;
-      }
-      
-      .description {
-        font-size: 13px;
-      }
-      
-      .status {
-        padding: 12px;
-        font-size: 13px;
-      }
-      
-      .section {
-        padding: 14px;
-        margin-top: 16px;
-      }
-      
-      .section-title {
-        font-size: 14px;
-      }
-      
-      .row-2 { 
-        grid-template-columns: 1fr; 
-        gap: 0;
-      }
-      .row-2 .field { 
-        margin-bottom: 14px; 
-      }
-      .row-2 .field:last-child { 
-        margin-bottom: 0; 
-      }
-      
-      .field label {
-        font-size: 12px;
-      }
-      
-      .toggle-row {
-        padding: 10px 0;
-        gap: 10px;
-      }
-      
-      .toggle-label span:first-child {
-        font-size: 12px;
-      }
-      .toggle-label span:last-child {
-        font-size: 11px;
-      }
-      
-      .toggle {
-        width: 44px;
-        height: 24px;
-      }
-      .toggle .slider:before {
-        height: 18px;
-        width: 18px;
-      }
-      .toggle input:checked + .slider:before {
-        transform: translateX(20px);
-      }
-      
-      .lock-overlay {
-        padding: 14px;
-      }
-      
-      .lock-title {
-        font-size: 15px;
-      }
-      
-      .lock-desc {
-        font-size: 12px;
-      }
-      
-      .lock-row {
-        flex-direction: column;
-        gap: 10px;
-      }
-      
-      .lock-row input {
-        width: 100%;
-      }
-      
-      .lock-row button {
-        width: 100%;
-        min-width: unset;
-        padding: 14px;
-      }
-      
-      .btn {
-        padding: 14px 16px;
-        font-size: 15px;
-      }
-      
-      .note {
-        font-size: 11px;
-      }
-      
-      .loading-overlay {
-        padding: 40px 16px;
-      }
-      
-      .loading-overlay .loader {
-        width: 40px;
-        height: 40px;
-      }
-      
-      .loading-overlay p {
-        font-size: 13px;
-      }
-    }
-    
-    /* Extra small screens */
-    @media (max-width: 360px) {
-      body {
-        padding: 8px;
-      }
-      
-      .card {
-        padding: 20px 14px;
-      }
-      
-      .logo {
-        font-size: 24px;
-      }
-      
-      .section {
-        padding: 12px;
-      }
-    }
-  </style>
+        .field input:focus,
+        .field select:focus {
+            border-color: #667eea;
+        }
+
+        .row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .row-2 .field {
+            margin-bottom: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row-2 .field label {
+            min-height: 36px;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        /* Toggle */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .toggle-row:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-label {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .toggle-label span:first-child {
+            font-size: 13px;
+            color: #222;
+            font-weight: 600;
+        }
+
+        .toggle-label span:last-child {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .toggle {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            flex-shrink: 0;
+        }
+
+        .toggle input {
+            display: none;
+        }
+
+        .toggle .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.25s;
+            border-radius: 999px;
+        }
+
+        .toggle .slider:before {
+            content: "";
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            top: 3px;
+            background-color: white;
+            transition: 0.25s;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle input:checked+.slider {
+            background-color: #25D366;
+        }
+
+        .toggle input:checked+.slider:before {
+            transform: translateX(22px);
+        }
+
+        .btn {
+            margin-top: 18px;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 16px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s, transform 0.1s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn:hover {
+            background-color: #1da851;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:disabled {
+            background-color: #bbb;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #888;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+            line-height: 1.5;
+        }
+
+        /* Password overlay */
+        .lock-overlay {
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 18px;
+            text-align: left;
+        }
+
+        .lock-title {
+            font-weight: 800;
+            color: #1a1a2e;
+            margin-bottom: 6px;
+        }
+
+        .lock-desc {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .lock-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lock-row input {
+            flex: 1;
+            min-width: 0;
+            padding: 12px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .lock-row button {
+            background: #667eea;
+            border: none;
+            color: white;
+            font-weight: 700;
+            padding: 12px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            min-width: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+            flex-shrink: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .lock-row button:hover {
+            background: #5a6de0;
+        }
+
+        .lock-row button:disabled {
+            background: #bbb;
+            cursor: not-allowed;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Loading overlay for form */
+        .loading-overlay {
+            display: none;
+            position: relative;
+            padding: 60px 20px;
+            text-align: center;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-top: 18px;
+        }
+
+        .loading-overlay.show {
+            display: block;
+        }
+
+        .loading-overlay .loader {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e0e0e0;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        .loading-overlay p {
+            color: #555;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Success Modal Overlay */
+        .success-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success-modal-overlay.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .success-modal {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 32px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 24px;
+            animation: scaleIn 0.5s ease 0.2s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .success-icon svg path {
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: drawCheck 0.5s ease 0.5s forwards;
+        }
+
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .success-modal h3 {
+            color: #1a1a2e;
+            font-size: 24px;
+            margin: 0 0 12px;
+            font-weight: 700;
+        }
+
+        .success-modal p {
+            color: #666;
+            font-size: 15px;
+            margin: 0 0 28px;
+            line-height: 1.5;
+        }
+
+        .success-modal-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .success-modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .success-modal-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 540px) {
+            body {
+                padding: 12px;
+                align-items: flex-start;
+            }
+
+            .card {
+                padding: 24px 18px;
+                border-radius: 12px;
+            }
+
+            .logo {
+                font-size: 26px;
+            }
+
+            .tagline {
+                font-size: 13px;
+                margin-bottom: 16px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .description {
+                font-size: 13px;
+            }
+
+            .status {
+                padding: 12px;
+                font-size: 13px;
+            }
+
+            .section {
+                padding: 14px;
+                margin-top: 16px;
+            }
+
+            .section-title {
+                font-size: 14px;
+            }
+
+            .row-2 {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .row-2 .field {
+                margin-bottom: 14px;
+            }
+
+            .row-2 .field:last-child {
+                margin-bottom: 0;
+            }
+
+            .row-2 .field label {
+                min-height: auto;
+            }
+
+            .field label {
+                font-size: 12px;
+            }
+
+            .toggle-row {
+                padding: 10px 0;
+                gap: 10px;
+            }
+
+            .toggle-label span:first-child {
+                font-size: 12px;
+            }
+
+            .toggle-label span:last-child {
+                font-size: 11px;
+            }
+
+            .toggle {
+                width: 44px;
+                height: 24px;
+            }
+
+            .toggle .slider:before {
+                height: 18px;
+                width: 18px;
+            }
+
+            .toggle input:checked+.slider:before {
+                transform: translateX(20px);
+            }
+
+            .lock-overlay {
+                padding: 14px;
+            }
+
+            .lock-title {
+                font-size: 15px;
+            }
+
+            .lock-desc {
+                font-size: 12px;
+            }
+
+            .lock-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .lock-row input {
+                width: 100%;
+            }
+
+            .lock-row button {
+                width: 100%;
+                min-width: unset;
+                padding: 14px;
+            }
+
+            .btn {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+
+            .note {
+                font-size: 11px;
+            }
+
+            .loading-overlay {
+                padding: 40px 16px;
+            }
+
+            .loading-overlay .loader {
+                width: 40px;
+                height: 40px;
+            }
+
+            .loading-overlay p {
+                font-size: 13px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 360px) {
+            body {
+                padding: 8px;
+            }
+
+            .card {
+                padding: 20px 14px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .section {
+                padding: 12px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="card">
-  <div class="logo">🚕 CabMind</div>
-  <div class="tagline">AI-Powered Communication for Taxi Operators</div>
+    <div class="card">
+        <div class="logo">🚕 CabMind</div>
+        <div class="tagline">AI-Powered Communication for Taxi Operators</div>
 
-  <h2>Finish Your Setup</h2>
+        <h2>Finish Your Setup</h2>
 
-  <p class="description">
-    Configure your CabMind features, booking rules and business details.
-    This page is protected and can only be accessed after successful WhatsApp connection.
-  </p>
+        <p class="description">
+            Configure your CabMind features, booking rules and business details.
+            This page is protected and can only be accessed after successful WhatsApp connection.
+        </p>
 
-  <div id="statusMessage" class="status"></div>
+        <div id="statusMessage" class="status"></div>
 
-  <!-- Password Gate -->
-  <div id="lockOverlay" class="lock-overlay">
-    <div class="lock-title">🔒 Protected Setup Page</div>
-    <div class="lock-desc">
-      Enter the setup password to continue. This page is not public.
+        <!-- Password Gate -->
+        <div id="lockOverlay" class="lock-overlay">
+            <div class="lock-title">🔒 Protected Setup Page</div>
+            <div class="lock-desc">
+                Enter the setup password to continue. This page is not public.
+            </div>
+            <div class="lock-row">
+                <input type="password" id="passwordInput" placeholder="Enter password..."
+                    onkeypress="handlePasswordKeypress(event)" />
+                <button id="unlockBtn" onclick="unlockPage()">
+                    <span id="unlockBtnText">Unlock</span>
+                    <span id="unlockSpinner" class="spinner" style="display:none;"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loader"></div>
+            <p>Loading your configuration...</p>
+        </div>
+
+        <!-- Main Form (hidden until unlock) -->
+        <form id="configForm" style="display:none;" onsubmit="submitConfig(event)">
+            <div class="section">
+                <div class="section-title">Business Info</div>
+
+                <div class="field">
+                    <label>Company Name</label>
+                    <input type="text" id="company_name" value="" placeholder="Eg. CabMind London" />
+                </div>
+
+                <div class="field">
+                    <label>Company Registered Name</label>
+                    <input type="text" id="company_registered_name" value="" placeholder="Eg. CabMind Ltd" />
+                </div>
+
+                <div class="row-2">
+                    <div class="field">
+                        <label>Admin Phone Number</label>
+                        <input type="text" id="admin_phone_number" value="" placeholder="Eg. 447123456789" />
+                    </div>
+
+                    <div class="field">
+                        <label>Contact Name</label>
+                        <input type="text" id="admin_name" value="" placeholder="Eg. Operations Manager" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Admin Email</label>
+                    <input type="email" id="admin_email" value="" placeholder="Eg. admin@company.com" />
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Booking Options</div>
+
+                <div class="toggle-row">
+                    <div class="toggle-label">
+                        <span>Enable Update Booking</span>
+                        <span>Allow customers to modify bookings</span>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" value="" id="enable_update_booking" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-label">
+                        <span>Enable Cancel Booking</span>
+                        <span>Allow customers to cancel bookings</span>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" value="" id="enable_cancel_booking" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-label">
+                        <span>Enable Inquiry</span>
+                        <span>Allow FAQ / inquiry flow</span>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" value="" id="enable_inquiry" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="row-2" style="margin-top:14px;">
+                    <div class="field">
+                        <label>Booking Modification Cutoff (minutes)</label>
+                        <input type="number" value="" id="booking_modification_cutoff_min" min="0" step="1"
+                            placeholder="60" />
+                    </div>
+
+                    <div class="field">
+                        <label>ASAP Interval (minutes)</label>
+                        <input type="number" value="" id="asap_interval_min" min="0" step="1" placeholder="60" />
+                    </div>
+                </div>
+
+                <div class="field" style="margin-top:14px;">
+                    <label>ASAP Mode</label>
+                    <select id="asap_mode">
+                        <option value="approval">Approval Required</option>
+                        <option value="reject">Reject ASAP Bookings</option>
+                        <option value="auto_accept">Auto Accept</option>
+                    </select>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-label">
+                        <span>Inform User</span>
+                        <span>Send system notifications to user</span>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" value="" id="inform_user" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Operations</div>
+
+                <div class="field">
+                    <label>Dispatch Provider</label>
+                    <input type="text" value="" id="dispatch_provider" placeholder="Eg. iCabbi / Autocab / Manual" />
+                </div>
+
+                <div class="row-2">
+                    <div class="field">
+                        <label>Working Hour Start (0-24)</label>
+                        <input type="number" value="" id="working_hour_start" min="0" max="24" step="1"
+                            placeholder="9" />
+                    </div>
+
+                    <div class="field">
+                        <label>Working Hour End (0-24)</label>
+                        <input type="number" value="" id="working_hour_end" min="0" max="24" step="1"
+                            placeholder="24" />
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" id="saveBtn" type="submit">Save Configuration</button>
+
+            <p class="note">
+                ✅ Your settings will be applied immediately.<br>
+                ⚠️ This page works only after redirect from WhatsApp connection flow.
+            </p>
+        </form>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="success-modal-overlay">
+            <div class="success-modal">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3>Configuration Saved!</h3>
+                <p>Your CabMind settings have been updated successfully and are now active.</p>
+                <button class="success-modal-btn" onclick="closeSuccessModal()">Continue</button>
+            </div>
+        </div>
     </div>
-    <div class="lock-row">
-      <input type="password" id="passwordInput" placeholder="Enter password..." onkeypress="handlePasswordKeypress(event)" />
-      <button id="unlockBtn" onclick="unlockPage()">
-        <span id="unlockBtnText">Unlock</span>
-        <span id="unlockSpinner" class="spinner" style="display:none;"></span>
-      </button>
-    </div>
-  </div>
 
-  <!-- Loading State -->
-  <div id="loadingOverlay" class="loading-overlay">
-    <div class="loader"></div>
-    <p>Loading your configuration...</p>
-  </div>
+    <script>
+        // ✅ CONFIG
+        const CONFIG = {
+            updateConfigWebhook: "https://automation.cabmind.co.uk/webhook/update-config",
+            password: "Cabmind@123",
+        };
 
-  <!-- Main Form (hidden until unlock) -->
-  <form id="configForm" style="display:none;" onsubmit="submitConfig(event)">
-    <div class="section">
-      <div class="section-title">Business Info</div>
+        const state = {
+            client_id: null,
+            unlocked: false,
+        };
 
-      <div class="field">
-        <label>Company Name</label>
-        <input type="text" id="company_name" placeholder="Eg. CabMind London" />
-      </div>
+        // Default schema (fallback if GET fails)
+        const DEFAULT_CONFIG = {
+            company_name: "",
+            company_registered_name: "",
+            admin_phone_number: "",
+            admin_email: "",
+            admin_name: "",
 
-      <div class="field">
-        <label>Company Registered Name</label>
-        <input type="text" id="company_registered_name" placeholder="Eg. CabMind Ltd" />
-      </div>
+            enable_update_booking: true,
+            enable_cancel_booking: true,
+            enable_inquiry: true,
 
-      <div class="row-2">
-        <div class="field">
-          <label>Admin Phone Number</label>
-          <input type="text" id="admin_phone_number" placeholder="Eg. 447123456789" />
-        </div>
+            booking_modification_cutoff_min: 60,
+            asap_interval_min: 60,
+            asap_mode: "approval",
 
-        <div class="field">
-          <label>Contact Name</label>
-          <input type="text" id="admin_name" placeholder="Eg. Operations Manager" />
-        </div>
-      </div>
+            dispatch_provider: "",
+            working_hour_start: 9,
+            working_hour_end: 24,
+            inform_user: false
+        };
 
-      <div class="field">
-        <label>Admin Email</label>
-        <input type="email" id="admin_email" placeholder="Eg. admin@company.com" />
-      </div>
-    </div>
+        // Init
+        (function init() {
+            const qs = new URLSearchParams(window.location.search);
+            state.client_id = qs.get("client_id");
 
-    <div class="section">
-      <div class="section-title">Booking Options</div>
+            if (!state.client_id) {
+                showStatus("❌ Missing client_id. This page can only be opened after successful signup redirect.", "error");
+                return;
+            }
 
-      <div class="toggle-row">
-        <div class="toggle-label">
-          <span>Enable Update Booking</span>
-          <span>Allow customers to modify bookings</span>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" id="enable_update_booking" />
-          <span class="slider"></span>
-        </label>
-      </div>
+            showStatus("🔒 Please unlock to load configuration.", "info");
+        })();
 
-      <div class="toggle-row">
-        <div class="toggle-label">
-          <span>Enable Cancel Booking</span>
-          <span>Allow customers to cancel bookings</span>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" id="enable_cancel_booking" />
-          <span class="slider"></span>
-        </label>
-      </div>
-
-      <div class="toggle-row">
-        <div class="toggle-label">
-          <span>Enable Inquiry</span>
-          <span>Allow FAQ / inquiry flow</span>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" id="enable_inquiry" />
-          <span class="slider"></span>
-        </label>
-      </div>
-
-      <div class="row-2" style="margin-top:14px;">
-        <div class="field">
-          <label>Booking Modification Cutoff (minutes)</label>
-          <input type="number" id="booking_modification_cutoff_min" min="0" step="1" placeholder="60" />
-        </div>
-
-        <div class="field">
-          <label>ASAP Interval (minutes)</label>
-          <input type="number" id="asap_interval_min" min="0" step="1" placeholder="60" />
-        </div>
-      </div>
-
-      <div class="field" style="margin-top:14px;">
-        <label>ASAP Mode</label>
-        <select id="asap_mode">
-          <option value="approval">Approval Required</option>
-          <option value="reject">Reject ASAP Bookings</option>
-          <option value="auto_accept">Auto Accept</option>
-        </select>
-      </div>
-
-      <div class="toggle-row">
-        <div class="toggle-label">
-          <span>Inform User</span>
-          <span>Send system notifications to user</span>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" id="inform_user" />
-          <span class="slider"></span>
-        </label>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Operations</div>
-
-      <div class="field">
-        <label>Dispatch Provider</label>
-        <input type="text" id="dispatch_provider" placeholder="Eg. iCabbi / Autocab / Manual" />
-      </div>
-
-      <div class="row-2">
-        <div class="field">
-          <label>Working Hour Start (0-24)</label>
-          <input type="number" id="working_hour_start" min="0" max="24" step="1" placeholder="9" />
-        </div>
-
-        <div class="field">
-          <label>Working Hour End (0-24)</label>
-          <input type="number" id="working_hour_end" min="0" max="24" step="1" placeholder="24" />
-        </div>
-      </div>
-    </div>
-
-    <button class="btn" id="saveBtn" type="submit">Save Configuration</button>
-
-    <p class="note">
-      ✅ Your settings will be applied immediately.<br>
-      ⚠️ This page works only after redirect from WhatsApp connection flow.
-    </p>
-  </form>
-</div>
-
-<script>
-  // ✅ CONFIG
-  const CONFIG = {
-    updateConfigWebhook: "https://automation.cabmind.co.uk/webhook/update-config",
-    password: "Cabmind@123",
-  };
-
-  const state = {
-    client_id: null,
-    unlocked: false,
-  };
-
-  // Default schema (fallback if GET fails)
-  const DEFAULT_CONFIG = {
-    company_name: "",
-    company_registered_name: "",
-    admin_phone_number: "",
-    admin_email: "",
-    admin_name: "",
-
-    enable_update_booking: true,
-    enable_cancel_booking: true,
-    enable_inquiry: true,
-
-    booking_modification_cutoff_min: 60,
-    asap_interval_min: 60,
-    asap_mode: "approval",
-
-    dispatch_provider: "",
-    working_hour_start: 9,
-    working_hour_end: 24,
-    inform_user: false
-  };
-
-  // Init
-  (function init() {
-    const qs = new URLSearchParams(window.location.search);
-    state.client_id = qs.get("client_id");
-
-    if (!state.client_id) {
-      showStatus("❌ Missing client_id. This page can only be opened after successful signup redirect.", "error");
-      return;
-    }
-
-    showStatus("🔒 Please unlock to load configuration.", "info");
-  })();
-
-  // Handle Enter key on password input
-  function handlePasswordKeypress(event) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      unlockPage();
-    }
-  }
-
-  // Password unlock
-  async function unlockPage() {
-    const input = document.getElementById("passwordInput");
-    const unlockBtn = document.getElementById("unlockBtn");
-    const unlockBtnText = document.getElementById("unlockBtnText");
-    const unlockSpinner = document.getElementById("unlockSpinner");
-    const entered = (input.value || "").trim();
-
-    if (entered !== CONFIG.password) {
-      showStatus("❌ Invalid password.", "error");
-      return;
-    }
-
-    // Show loading state on button
-    unlockBtn.disabled = true;
-    unlockBtnText.textContent = "Unlocking";
-    unlockSpinner.style.display = "block";
-
-    state.unlocked = true;
-
-    // Hide lock overlay and show loading overlay
-    document.getElementById("lockOverlay").style.display = "none";
-    document.getElementById("loadingOverlay").classList.add("show");
-
-    showStatus("✅ Access granted. Loading your current configuration...", "success");
-
-    const success = await loadConfig();
-
-    // Only show form if config loaded successfully
-    if (success) {
-      // Hide loading overlay and show form
-      document.getElementById("loadingOverlay").classList.remove("show");
-      document.getElementById("configForm").style.display = "block";
-    }
-  }
-
-  // Load config from webhook (GET)
-  async function loadConfig() {
-    try {
-      const url = `${CONFIG.updateConfigWebhook}?client_id=${encodeURIComponent(state.client_id)}`;
-
-      const res = await fetch(url, { method: "GET" });
-
-      if (!res.ok) {
-        throw new Error(`Server responded with status ${res.status}`);
-      }
-
-      let data = null;
-      try { data = await res.json(); } catch(e) {
-        throw new Error("Invalid response from server");
-      }
-
-      // Check if response indicates an error
-      if (data && data.ok === false) {
-        throw new Error(data.message || "Failed to load configuration");
-      }
-
-      // Expected formats:
-      // 1) { ok:true, config:{...} }
-      // 2) { ...configFields }
-      // 3) Array with config object
-      let config = { ...DEFAULT_CONFIG };
-
-      if (data && typeof data === "object") {
-        // Handle array response - take first item
-        if (Array.isArray(data) && data.length > 0) {
-          data = data[0];
+        // Handle Enter key on password input
+        function handlePasswordKeypress(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                unlockPage();
+            }
         }
-        
-        if (data.config && typeof data.config === "object") {
-          config = { ...DEFAULT_CONFIG, ...data.config };
-        } else {
-          config = { ...DEFAULT_CONFIG, ...data };
+
+        // Password unlock
+        async function unlockPage() {
+            const input = document.getElementById("passwordInput");
+            const unlockBtn = document.getElementById("unlockBtn");
+            const unlockBtnText = document.getElementById("unlockBtnText");
+            const unlockSpinner = document.getElementById("unlockSpinner");
+            const entered = (input.value || "").trim();
+
+            if (entered !== CONFIG.password) {
+                showStatus("❌ Invalid password.", "error");
+                return;
+            }
+
+            // Show loading state on button
+            unlockBtn.disabled = true;
+            unlockBtnText.textContent = "Unlocking";
+            unlockSpinner.style.display = "block";
+
+            state.unlocked = true;
+
+            // Hide lock overlay and show loading overlay
+            document.getElementById("lockOverlay").style.display = "none";
+            document.getElementById("loadingOverlay").classList.add("show");
+
+            showStatus("✅ Access granted. Loading your current configuration...", "success");
+
+            const success = await loadConfig();
+
+            // Only show form if config loaded successfully
+            if (success) {
+                // Hide loading overlay and show form
+                document.getElementById("loadingOverlay").classList.remove("show");
+                document.getElementById("configForm").style.display = "block";
+            }
         }
-      }
 
-      populateForm(config);
-      showStatus("✅ Config loaded successfully.", "success");
-      return true;
-    } catch (err) {
-      showStatus("❌ Failed to load configuration: " + err.message + ". Please try again.", "error");
-      resetToPasswordScreen();
-      return false;
-    }
-  }
+        // Field name mapping for API response variations
+        const FIELD_MAP = {
+            // Common variations -> form field ID
+            'companyName': 'company_name',
+            'company_name': 'company_name',
+            'companyRegisteredName': 'company_registered_name',
+            'company_registered_name': 'company_registered_name',
+            'adminPhoneNumber': 'admin_phone_number',
+            'admin_phone_number': 'admin_phone_number',
+            'adminEmail': 'admin_email',
+            'admin_email': 'admin_email',
+            'adminName': 'admin_name',
+            'admin_name': 'admin_name',
+            'enableUpdateBooking': 'enable_update_booking',
+            'enable_update_booking': 'enable_update_booking',
+            'enableCancelBooking': 'enable_cancel_booking',
+            'enable_cancel_booking': 'enable_cancel_booking',
+            'enableInquiry': 'enable_inquiry',
+            'enable_inquiry': 'enable_inquiry',
+            'bookingModificationCutoffMin': 'booking_modification_cutoff_min',
+            'booking_modification_cutoff_min': 'booking_modification_cutoff_min',
+            'asapIntervalMin': 'asap_interval_min',
+            'asap_interval_min': 'asap_interval_min',
+            'asapMode': 'asap_mode',
+            'asap_mode': 'asap_mode',
+            'dispatchProvider': 'dispatch_provider',
+            'dispatch_provider': 'dispatch_provider',
+            'workingHourStart': 'working_hour_start',
+            'working_hour_start': 'working_hour_start',
+            'workingHourEnd': 'working_hour_end',
+            'working_hour_end': 'working_hour_end',
+            'informUser': 'inform_user',
+            'inform_user': 'inform_user'
+        };
 
-  // Reset back to password screen on failure
-  function resetToPasswordScreen() {
-    state.unlocked = false;
-    
-    // Hide loading overlay and form
-    document.getElementById("loadingOverlay").classList.remove("show");
-    document.getElementById("configForm").style.display = "none";
-    
-    // Show lock overlay again
-    const lockOverlay = document.getElementById("lockOverlay");
-    lockOverlay.style.display = "block";
-    
-    // Reset unlock button state
-    const unlockBtn = document.getElementById("unlockBtn");
-    const unlockBtnText = document.getElementById("unlockBtnText");
-    const unlockSpinner = document.getElementById("unlockSpinner");
-    unlockBtn.disabled = false;
-    unlockBtnText.textContent = "Unlock";
-    unlockSpinner.style.display = "none";
-    
-    // Clear password input
-    document.getElementById("passwordInput").value = "";
-  }
+        // Normalize API response keys to match form field IDs
+        function normalizeConfig(rawData) {
+            const normalized = {};
+            for (const key in rawData) {
+                const mappedKey = FIELD_MAP[key] || key;
+                normalized[mappedKey] = rawData[key];
+            }
+            return normalized;
+        }
 
-  // Submit config to webhook (POST)
-  async function submitConfig(e) {
-    e.preventDefault();
+        // Load config from webhook (GET)
+        async function loadConfig() {
+            try {
+                const url = `${CONFIG.updateConfigWebhook}?client_id=${encodeURIComponent(state.client_id)}`;
 
-    const btn = document.getElementById("saveBtn");
-    btn.disabled = true;
-    btn.textContent = "Saving...";
+                const res = await fetch(url, { method: "GET" });
+                debugger;
+                if (!res.ok) {
+                    throw new Error(`Server responded with status ${res.status}`);
+                }
 
-    try {
-      const payload = buildPayloadFromForm();
+                let data = null;
+                try { data = await res.json(); } catch (e) {
+                    throw new Error("Invalid response from server");
+                }
 
-      const res = await fetch(CONFIG.updateConfigWebhook, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
+                // Check if response indicates an error
+                if (data && data.ok === false) {
+                    throw new Error(data.message || "Failed to load configuration");
+                }
 
-      const data = await res.json();
+                // Expected formats:
+                // 1) { ok:true, data:{...} }
+                // 2) { ...configFields }
+                // 3) Array with config object
+                let rawConfig = {};
 
-      if (data.ok === true) {
-        showStatus("✅ Configuration saved successfully!", "success");
-      } else {
-        showStatus("❌ Save failed: " + (data.message || "Unknown error"), "error");
-      }
-    } catch (err) {
-      showStatus("❌ Failed to save: " + err.message, "error");
-    } finally {
-      btn.disabled = false;
-      btn.textContent = "Save Configuration";
-    }
-  }
+                if (data && typeof data === "object") {
+                    // Handle array response - take first item
+                    if (Array.isArray(data) && data.length > 0) {
+                        data = data[0];
+                    }
 
-  // Helpers
-  function populateForm(cfg) {
-    setValue("company_name", cfg.company_name);
-    setValue("company_registered_name", cfg.company_registered_name);
-    setValue("admin_phone_number", cfg.admin_phone_number);
-    setValue("admin_email", cfg.admin_email);
-    setValue("admin_name", cfg.admin_name);
+                    if (data.data && typeof data.data === "object") {
+                        rawConfig = data.data;
+                    } else {
+                        rawConfig = data;
+                    }
+                }
 
-    setToggle("enable_update_booking", toBool(cfg.enable_update_booking));
-    setToggle("enable_cancel_booking", toBool(cfg.enable_cancel_booking));
-    setToggle("enable_inquiry", toBool(cfg.enable_inquiry));
+                // Normalize field names and merge with defaults
+                const normalizedConfig = normalizeConfig(rawConfig);
+                const config = { ...DEFAULT_CONFIG, ...normalizedConfig };
+                console.log(rawConfig, data, normalizedConfig, config);
+                populateForm(config);
+                showStatus("✅ Config loaded successfully.", "success");
+                return true;
+            } catch (err) {
+                showStatus("❌ Failed to load configuration: " + err.message + ". Please try again.", "error");
+                resetToPasswordScreen();
+                return false;
+            }
+        }
 
-    setNumberValue("booking_modification_cutoff_min", cfg.booking_modification_cutoff_min);
-    setNumberValue("asap_interval_min", cfg.asap_interval_min);
-    setValue("asap_mode", cfg.asap_mode);
+        // Reset back to password screen on failure
+        function resetToPasswordScreen() {
+            state.unlocked = false;
 
-    setValue("dispatch_provider", cfg.dispatch_provider);
-    setNumberValue("working_hour_start", cfg.working_hour_start);
-    setNumberValue("working_hour_end", cfg.working_hour_end);
+            // Hide loading overlay and form
+            document.getElementById("loadingOverlay").classList.remove("show");
+            document.getElementById("configForm").style.display = "none";
 
-    setToggle("inform_user", toBool(cfg.inform_user));
-  }
+            // Show lock overlay again
+            const lockOverlay = document.getElementById("lockOverlay");
+            lockOverlay.style.display = "block";
 
-  function buildPayloadFromForm() {
-    const working_start = clampNumber(getNumber("working_hour_start"), 0, 24);
-    const working_end = clampNumber(getNumber("working_hour_end"), 0, 24);
+            // Reset unlock button state
+            const unlockBtn = document.getElementById("unlockBtn");
+            const unlockBtnText = document.getElementById("unlockBtnText");
+            const unlockSpinner = document.getElementById("unlockSpinner");
+            unlockBtn.disabled = false;
+            unlockBtnText.textContent = "Unlock";
+            unlockSpinner.style.display = "none";
 
-    return {
-      client_id: state.client_id,
+            // Clear password input
+            document.getElementById("passwordInput").value = "";
+        }
 
-      company_name: getValue("company_name"),
-      company_registered_name: getValue("company_registered_name"),
-      admin_phone_number: getValue("admin_phone_number"),
-      admin_email: getValue("admin_email"),
-      admin_name: getValue("admin_name"),
+        // Submit config to webhook (POST)
+        async function submitConfig(e) {
+            e.preventDefault();
 
-      enable_update_booking: getToggle("enable_update_booking"),
-      enable_cancel_booking: getToggle("enable_cancel_booking"),
-      enable_inquiry: getToggle("enable_inquiry"),
+            const btn = document.getElementById("saveBtn");
+            btn.disabled = true;
+            btn.textContent = "Saving...";
 
-      booking_modification_cutoff_min: getNumber("booking_modification_cutoff_min"),
-      asap_interval_min: getNumber("asap_interval_min"),
-      asap_mode: getValue("asap_mode"),
+            try {
+                const payload = buildPayloadFromForm();
 
-      dispatch_provider: getValue("dispatch_provider"),
+                const res = await fetch(CONFIG.updateConfigWebhook, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
 
-      working_hour_start: working_start,
-      working_hour_end: working_end,
+                const data = await res.json();
 
-      inform_user: getToggle("inform_user"),
+                if (data.ok === true) {
+                    showSuccessModal();
+                } else {
+                    showStatus("❌ Save failed: " + (data.message || "Unknown error"), "error");
+                }
+            } catch (err) {
+                showStatus("❌ Failed to save: " + err.message, "error");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Save Configuration";
+            }
+        }
 
-      timestamp: new Date().toISOString()
-    };
-  }
+        // Helpers
+        function populateForm(cfg) {
+            setValue("company_name", cfg.company_name);
+            setValue("company_registered_name", cfg.company_registered_name);
+            setValue("admin_phone_number", cfg.admin_phone_number);
+            setValue("admin_email", cfg.admin_email);
+            setValue("admin_name", cfg.admin_name);
 
-  function toBool(v) {
-    if (typeof v === "boolean") return v;
-    if (typeof v === "string") return v.toLowerCase() === "true";
-    if (typeof v === "number") return v === 1;
-    return false;
-  }
+            setToggle("enable_update_booking", toBool(cfg.enable_update_booking));
+            setToggle("enable_cancel_booking", toBool(cfg.enable_cancel_booking));
+            setToggle("enable_inquiry", toBool(cfg.enable_inquiry));
 
-  function clampNumber(n, min, max) {
-    const num = Number(n);
-    if (Number.isNaN(num)) return min;
-    return Math.max(min, Math.min(max, num));
-  }
+            setNumberValue("booking_modification_cutoff_min", cfg.booking_modification_cutoff_min);
+            setNumberValue("asap_interval_min", cfg.asap_interval_min);
+            setValue("asap_mode", cfg.asap_mode);
 
-  function setValue(id, val) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.value = val ?? "";
-  }
+            setValue("dispatch_provider", cfg.dispatch_provider);
+            setNumberValue("working_hour_start", cfg.working_hour_start);
+            setNumberValue("working_hour_end", cfg.working_hour_end);
 
-  function setNumberValue(id, val) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    // Convert to number and handle null/undefined
-    const numVal = Number(val);
-    if (val !== null && val !== undefined && val !== "" && !Number.isNaN(numVal)) {
-      el.value = numVal;
-    } else {
-      el.value = "";
-    }
-  }
+            setToggle("inform_user", toBool(cfg.inform_user));
+        }
 
-  function getValue(id) {
-    const el = document.getElementById(id);
-    return el ? (el.value || "").trim() : "";
-  }
+        function buildPayloadFromForm() {
+            const working_start = clampNumber(getNumber("working_hour_start"), 0, 24);
+            const working_end = clampNumber(getNumber("working_hour_end"), 0, 24);
 
-  function getNumber(id) {
-    const el = document.getElementById(id);
-    if (!el) return 0;
-    const n = Number(el.value);
-    return Number.isNaN(n) ? 0 : n;
-  }
+            return {
+                client_id: state.client_id,
 
-  function setToggle(id, val) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.checked = !!val;
-  }
+                company_name: getValue("company_name"),
+                company_registered_name: getValue("company_registered_name"),
+                admin_phone_number: getValue("admin_phone_number"),
+                admin_email: getValue("admin_email"),
+                admin_name: getValue("admin_name"),
 
-  function getToggle(id) {
-    const el = document.getElementById(id);
-    return el ? !!el.checked : false;
-  }
+                enable_update_booking: getToggle("enable_update_booking"),
+                enable_cancel_booking: getToggle("enable_cancel_booking"),
+                enable_inquiry: getToggle("enable_inquiry"),
 
-  function showStatus(message, type) {
-    const statusEl = document.getElementById("statusMessage");
-    statusEl.innerHTML = message;
-    statusEl.className = "status " + type;
-  }
-</script>
+                booking_modification_cutoff_min: getNumber("booking_modification_cutoff_min"),
+                asap_interval_min: getNumber("asap_interval_min"),
+                asap_mode: getValue("asap_mode"),
+
+                dispatch_provider: getValue("dispatch_provider"),
+
+                working_hour_start: working_start,
+                working_hour_end: working_end,
+
+                inform_user: getToggle("inform_user"),
+
+                timestamp: new Date().toISOString()
+            };
+        }
+
+        function toBool(v) {
+            if (typeof v === "boolean") return v;
+            if (typeof v === "string") return v.toLowerCase() === "true";
+            if (typeof v === "number") return v === 1;
+            return false;
+        }
+
+        function clampNumber(n, min, max) {
+            const num = Number(n);
+            if (Number.isNaN(num)) return min;
+            return Math.max(min, Math.min(max, num));
+        }
+
+        function setValue(id, val) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.value = val ?? "";
+        }
+
+        function setNumberValue(id, val) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            // Convert to number and handle null/undefined
+            const numVal = Number(val);
+            if (val !== null && val !== undefined && val !== "" && !Number.isNaN(numVal)) {
+                el.value = numVal;
+            } else {
+                el.value = "";
+            }
+        }
+
+        function getValue(id) {
+            const el = document.getElementById(id);
+            return el ? (el.value || "").trim() : "";
+        }
+
+        function getNumber(id) {
+            const el = document.getElementById(id);
+            if (!el) return 0;
+            const n = Number(el.value);
+            return Number.isNaN(n) ? 0 : n;
+        }
+
+        function setToggle(id, val) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.checked = !!val;
+        }
+
+        function getToggle(id) {
+            const el = document.getElementById(id);
+            return el ? !!el.checked : false;
+        }
+
+        function showStatus(message, type) {
+            const statusEl = document.getElementById("statusMessage");
+            statusEl.innerHTML = message;
+            statusEl.className = "status " + type;
+        }
+
+        function showSuccessModal() {
+            const modal = document.getElementById("successModal");
+            modal.classList.add("show");
+            // Hide status message when showing modal
+            document.getElementById("statusMessage").className = "status";
+        }
+
+        function closeSuccessModal() {
+            const modal = document.getElementById("successModal");
+            modal.classList.remove("show");
+        }
+    </script>
 
 </body>
+
 </html>
