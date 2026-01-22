@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CabMind Setup - Features</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      max-width: 560px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+    .tagline {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      color: #1a1a2e;
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .description {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .status {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 8px;
+      display: none;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .status.success {
+      display: block;
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .status.error {
+      display: block;
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .status.info {
+      display: block;
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    .section {
+      text-align: left;
+      margin-top: 20px;
+      padding: 18px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border: 1px solid #eee;
+    }
+
+    .section-title {
+      margin: 0 0 12px 0;
+      color: #1a1a2e;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .field label {
+      font-size: 13px;
+      color: #333;
+      font-weight: 600;
+    }
+    .field input[type="text"],
+    .field input[type="email"],
+    .field input[type="number"],
+    .field select {
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      background: #fff;
+    }
+    .field input:focus,
+    .field select:focus {
+      border-color: #667eea;
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 540px) {
+      .row-2 { grid-template-columns: 1fr; }
+    }
+
+    /* Toggle */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #eaeaea;
+    }
+    .toggle-row:last-child { border-bottom: none; }
+
+    .toggle-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .toggle-label span:first-child {
+      font-size: 13px;
+      color: #222;
+      font-weight: 600;
+    }
+    .toggle-label span:last-child {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .toggle {
+      position: relative;
+      width: 48px;
+      height: 26px;
+    }
+    .toggle input {
+      display: none;
+    }
+    .toggle .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: 0.25s;
+      border-radius: 999px;
+    }
+    .toggle .slider:before {
+      content: "";
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      top: 3px;
+      background-color: white;
+      transition: 0.25s;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .toggle input:checked + .slider {
+      background-color: #25D366;
+    }
+    .toggle input:checked + .slider:before {
+      transform: translateX(22px);
+    }
+
+    .btn {
+      margin-top: 18px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+    .btn:hover {
+      background-color: #1da851;
+      transform: translateY(-1px);
+    }
+    .btn:disabled {
+      background-color: #bbb;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #888;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #eee;
+      line-height: 1.5;
+    }
+
+    .small-muted {
+      font-size: 12px;
+      color: #888;
+      margin-top: 8px;
+      text-align: left;
+    }
+
+    /* Debug */
+    .debug-panel {
+      margin-top: 18px;
+      padding: 16px;
+      background: #1a1a2e;
+      border-radius: 10px;
+      text-align: left;
+      display: none;
+    }
+    .debug-panel.show { display: block; }
+    .debug-panel h4 {
+      color: #25D366;
+      margin: 0 0 10px 0;
+      font-size: 14px;
+    }
+    .debug-panel pre {
+      color: #fff;
+      font-size: 12px;
+      overflow-x: auto;
+      margin: 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    /* Password overlay */
+    .lock-overlay {
+      background: rgba(255,255,255,0.96);
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 18px;
+      text-align: left;
+    }
+    .lock-title {
+      font-weight: 800;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+    .lock-desc {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .lock-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .lock-row input {
+      flex: 1;
+      padding: 12px 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+    .lock-row button {
+      background: #667eea;
+      border: none;
+      color: white;
+      font-weight: 700;
+      padding: 12px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .lock-row button:hover {
+      background: #5a6de0;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="logo">🚕 CabMind</div>
+  <div class="tagline">AI-Powered Communication for Taxi Operators</div>
+
+  <h2>Finish Your Setup</h2>
+
+  <p class="description">
+    Configure your CabMind features, booking rules and business details.
+    This page is protected and can only be accessed after successful WhatsApp connection.
+  </p>
+
+  <div id="statusMessage" class="status"></div>
+
+  <!-- Password Gate -->
+  <div id="lockOverlay" class="lock-overlay">
+    <div class="lock-title">🔒 Protected Setup Page</div>
+    <div class="lock-desc">
+      Enter the setup password to continue. This page is not public.
+    </div>
+    <div class="lock-row">
+      <input type="password" id="passwordInput" placeholder="Enter password..." />
+      <button onclick="unlockPage()">Unlock</button>
+    </div>
+    <div class="small-muted">Password: Cabmind@123</div>
+  </div>
+
+  <!-- Main Form (hidden until unlock) -->
+  <form id="configForm" style="display:none;" onsubmit="submitConfig(event)">
+    <div class="section">
+      <div class="section-title">Business Info</div>
+
+      <div class="field">
+        <label>Company Name</label>
+        <input type="text" id="company_name" placeholder="Eg. CabMind London" />
+      </div>
+
+      <div class="field">
+        <label>Company Registered Name</label>
+        <input type="text" id="company_registered_name" placeholder="Eg. CabMind Ltd" />
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <label>Admin Phone Number</label>
+          <input type="text" id="admin_phone_number" placeholder="Eg. 447123456789" />
+        </div>
+
+        <div class="field">
+          <label>Admin Name</label>
+          <input type="text" id="admin_name" placeholder="Eg. Hardik" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Admin Email</label>
+        <input type="email" id="admin_email" placeholder="Eg. admin@company.com" />
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Booking Options</div>
+
+      <div class="toggle-row">
+        <div class="toggle-label">
+          <span>Enable Update Booking</span>
+          <span>Allow customers to modify bookings</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="enable_update_booking" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-label">
+          <span>Enable Cancel Booking</span>
+          <span>Allow customers to cancel bookings</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="enable_cancel_booking" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-label">
+          <span>Enable Inquiry</span>
+          <span>Allow FAQ / inquiry flow</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="enable_inquiry" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="row-2" style="margin-top:14px;">
+        <div class="field">
+          <label>Booking Modification Cutoff (minutes)</label>
+          <input type="number" id="booking_modification_cutoff_min" min="0" step="1" />
+        </div>
+
+        <div class="field">
+          <label>ASAP Interval (minutes)</label>
+          <input type="number" id="asap_interval_min" min="0" step="1" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>ASAP Mode</label>
+        <select id="asap_mode">
+          <option value="approval">approval</option>
+          <option value="reject">reject</option>
+          <option value="auto_accept">auto_accept</option>
+        </select>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-label">
+          <span>Inform User</span>
+          <span>Send system notifications to user</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="inform_user" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Operations</div>
+
+      <div class="field">
+        <label>Dispatch Provider</label>
+        <input type="text" id="dispatch_provider" placeholder="Eg. iCabbi / Autocab / Manual" />
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <label>Working Hour Start (0-24)</label>
+          <input type="number" id="working_hour_start" min="0" max="24" step="1" />
+        </div>
+
+        <div class="field">
+          <label>Working Hour End (0-24)</label>
+          <input type="number" id="working_hour_end" min="0" max="24" step="1" />
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" id="saveBtn" type="submit">Save Configuration</button>
+
+    <p class="note">
+      ✅ Your settings will be applied immediately.<br>
+      ⚠️ This page works only after redirect from WhatsApp connection flow.
+    </p>
+  </form>
+
+  <!-- Debug Panel -->
+  <div id="debugPanel" class="debug-panel">
+    <h4>📋 Debug</h4>
+    <pre id="debugOutput">Ready...</pre>
+  </div>
+</div>
+
+<script>
+  // ✅ CONFIG
+  const CONFIG = {
+    // You said: same webhook URL for GET + POST
+    // Create webhook route: update-config
+    updateConfigWebhook: "https://automation.cabmind.co.uk/webhook/update-config",
+    debug: true,
+    password: "Cabmind@123",
+  };
+
+  const state = {
+    client_id: null,
+    unlocked: false,
+  };
+
+  // Default schema (fallback if GET fails)
+  const DEFAULT_CONFIG = {
+    company_name: "",
+    company_registered_name: "",
+    admin_phone_number: "",
+    admin_email: "",
+    admin_name: "",
+
+    enable_update_booking: true,
+    enable_cancel_booking: true,
+    enable_inquiry: true,
+
+    booking_modification_cutoff_min: 60,
+    asap_interval_min: 60,
+    asap_mode: "approval",
+
+    dispatch_provider: "",
+    working_hour_start: 9,
+    working_hour_end: 24,
+    inform_user: false
+  };
+
+  // Init
+  (function init() {
+    const qs = new URLSearchParams(window.location.search);
+    state.client_id = qs.get("client_id");
+
+    if (!state.client_id) {
+      showStatus("❌ Missing client_id. This page can only be opened after successful signup redirect.", "error");
+      updateDebug("No client_id in URL.");
+      return;
+    }
+
+    showStatus("🔒 Please unlock to load configuration.", "info");
+    updateDebug("client_id = " + state.client_id);
+  })();
+
+  // Password unlock
+  async function unlockPage() {
+    const input = document.getElementById("passwordInput");
+    const entered = (input.value || "").trim();
+
+    if (entered !== CONFIG.password) {
+      showStatus("❌ Invalid password.", "error");
+      return;
+    }
+
+    state.unlocked = true;
+
+    document.getElementById("lockOverlay").style.display = "none";
+    document.getElementById("configForm").style.display = "block";
+
+    showStatus("✅ Access granted. Loading your current configuration...", "success");
+
+    await loadConfig();
+  }
+
+  // Load config from webhook (GET)
+  async function loadConfig() {
+    try {
+      showStatus("⏳ Loading config from server...", "info");
+
+      const url = `${CONFIG.updateConfigWebhook}?client_id=${encodeURIComponent(state.client_id)}`;
+      updateDebug("GET " + url);
+
+      const res = await fetch(url, { method: "GET" });
+
+      let data = null;
+      try { data = await res.json(); } catch(e) {}
+
+      updateDebug("GET response:\n" + JSON.stringify(data, null, 2));
+
+      // Expected formats:
+      // 1) { ok:true, config:{...} }
+      // 2) { ...configFields }
+      let config = DEFAULT_CONFIG;
+
+      if (data && typeof data === "object") {
+        if (data.config && typeof data.config === "object") config = { ...DEFAULT_CONFIG, ...data.config };
+        else config = { ...DEFAULT_CONFIG, ...data };
+      }
+
+      populateForm(config);
+      showStatus("✅ Config loaded successfully.", "success");
+    } catch (err) {
+      showStatus("⚠️ Failed to load from server. Using default config.", "error");
+      updateDebug("Load error: " + err.message);
+      populateForm(DEFAULT_CONFIG);
+    }
+  }
+
+  // Submit config to webhook (POST)
+  async function submitConfig(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById("saveBtn");
+    btn.disabled = true;
+    btn.textContent = "Saving...";
+
+    try {
+      const payload = buildPayloadFromForm();
+      updateDebug("POST payload:\n" + JSON.stringify(payload, null, 2));
+
+      const res = await fetch(CONFIG.updateConfigWebhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+      updateDebug("POST response:\n" + JSON.stringify(data, null, 2));
+
+      if (data.ok === true) {
+        showStatus("✅ Configuration saved successfully!", "success");
+      } else {
+        showStatus("❌ Save failed: " + (data.message || "Unknown error"), "error");
+      }
+    } catch (err) {
+      showStatus("❌ Failed to save: " + err.message, "error");
+      updateDebug("Submit error: " + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Save Configuration";
+    }
+  }
+
+  // Helpers
+  function populateForm(cfg) {
+    setValue("company_name", cfg.company_name);
+    setValue("company_registered_name", cfg.company_registered_name);
+    setValue("admin_phone_number", cfg.admin_phone_number);
+    setValue("admin_email", cfg.admin_email);
+    setValue("admin_name", cfg.admin_name);
+
+    setToggle("enable_update_booking", toBool(cfg.enable_update_booking));
+    setToggle("enable_cancel_booking", toBool(cfg.enable_cancel_booking));
+    setToggle("enable_inquiry", toBool(cfg.enable_inquiry));
+
+    setValue("booking_modification_cutoff_min", cfg.booking_modification_cutoff_min);
+    setValue("asap_interval_min", cfg.asap_interval_min);
+    setValue("asap_mode", cfg.asap_mode);
+
+    setValue("dispatch_provider", cfg.dispatch_provider);
+    setValue("working_hour_start", cfg.working_hour_start);
+    setValue("working_hour_end", cfg.working_hour_end);
+
+    setToggle("inform_user", toBool(cfg.inform_user));
+  }
+
+  function buildPayloadFromForm() {
+    const working_start = clampNumber(getNumber("working_hour_start"), 0, 24);
+    const working_end = clampNumber(getNumber("working_hour_end"), 0, 24);
+
+    return {
+      client_id: state.client_id,
+
+      company_name: getValue("company_name"),
+      company_registered_name: getValue("company_registered_name"),
+      admin_phone_number: getValue("admin_phone_number"),
+      admin_email: getValue("admin_email"),
+      admin_name: getValue("admin_name"),
+
+      enable_update_booking: getToggle("enable_update_booking"),
+      enable_cancel_booking: getToggle("enable_cancel_booking"),
+      enable_inquiry: getToggle("enable_inquiry"),
+
+      booking_modification_cutoff_min: getNumber("booking_modification_cutoff_min"),
+      asap_interval_min: getNumber("asap_interval_min"),
+      asap_mode: getValue("asap_mode"),
+
+      dispatch_provider: getValue("dispatch_provider"),
+
+      working_hour_start: working_start,
+      working_hour_end: working_end,
+
+      inform_user: getToggle("inform_user"),
+
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  function toBool(v) {
+    if (typeof v === "boolean") return v;
+    if (typeof v === "string") return v.toLowerCase() === "true";
+    if (typeof v === "number") return v === 1;
+    return false;
+  }
+
+  function clampNumber(n, min, max) {
+    const num = Number(n);
+    if (Number.isNaN(num)) return min;
+    return Math.max(min, Math.min(max, num));
+  }
+
+  function setValue(id, val) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = val ?? "";
+  }
+
+  function getValue(id) {
+    const el = document.getElementById(id);
+    return el ? (el.value || "").trim() : "";
+  }
+
+  function getNumber(id) {
+    const el = document.getElementById(id);
+    if (!el) return 0;
+    const n = Number(el.value);
+    return Number.isNaN(n) ? 0 : n;
+  }
+
+  function setToggle(id, val) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.checked = !!val;
+  }
+
+  function getToggle(id) {
+    const el = document.getElementById(id);
+    return el ? !!el.checked : false;
+  }
+
+  function showStatus(message, type) {
+    const statusEl = document.getElementById("statusMessage");
+    statusEl.innerHTML = message;
+    statusEl.className = "status " + type;
+  }
+
+  function updateDebug(message) {
+    if (!CONFIG.debug) return;
+    const debugPanel = document.getElementById("debugPanel");
+    const debugOutput = document.getElementById("debugOutput");
+    debugPanel.classList.add("show");
+    debugOutput.textContent = message;
+  }
+</script>
+
+</body>
+</html>
